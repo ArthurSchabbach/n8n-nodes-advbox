@@ -12,37 +12,19 @@ import {
 
 export class Advbox implements INodeType {
 
-	private static async _loadSettingsData(loadOptionsFunctions: ILoadOptionsFunctions): Promise<any> {
-		try {
-			const credentials = await loadOptionsFunctions.getCredentials('advboxApi');
-			const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
-
-			const options: IHttpRequestOptions = {
-				method: 'GET',
-				url: `${baseUrl}/settings`,
-				headers: {
-					'Accept': 'application/json',
-				},
-			};
-
-			return await loadOptionsFunctions.helpers.requestWithAuthentication.call(
-				loadOptionsFunctions,
-				'advboxApi',
-				options,
-			);
-		} catch (error) {
-			return {};
-		}
-	}
-
 	methods = {
 		loadOptions: {
-			// Método para carregar opções de usuários sem depender do endpoint /settings
 			async loadUsers(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
 
 				try {
-					const response = await Advbox._loadSettingsData(this);
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
 
 					if (response && response.users && Array.isArray(response.users)) {
 						for (const user of response.users) {
@@ -65,8 +47,13 @@ export class Advbox implements INodeType {
 				const returnData: INodePropertyOptions[] = [];
 
 				try {
-					// Usar o método auxiliar para carregar dados do endpoint /settings
-					const response = await Advbox._loadSettingsData(this);
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
 
 					if (response && response.origins && Array.isArray(response.origins)) {
 						for (const origin of response.origins) {
@@ -89,8 +76,13 @@ export class Advbox implements INodeType {
 				const returnData: INodePropertyOptions[] = [];
 
 				try {
-					// Usar o método auxiliar para carregar dados do endpoint /settings
-					const response = await Advbox._loadSettingsData(this);
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
 
 					if (response && response.tasks && Array.isArray(response.tasks)) {
 						for (const task of response.tasks) {
@@ -113,8 +105,13 @@ export class Advbox implements INodeType {
 				const returnData: INodePropertyOptions[] = [];
 
 				try {
-					// Usar o método auxiliar para carregar dados do endpoint /settings
-					const response = await Advbox._loadSettingsData(this);
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
 
 					if (response && response.stages && Array.isArray(response.stages)) {
 						for (const stage of response.stages) {
@@ -138,8 +135,13 @@ export class Advbox implements INodeType {
 				const uniqueGroups = new Set<string>();
 
 				try {
-					// Usar o método auxiliar para carregar dados do endpoint /settings
-					const response = await Advbox._loadSettingsData(this);
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
 
 					if (response && response.type_lawsuits && Array.isArray(response.type_lawsuits)) {
 						// Extrair grupos únicos
@@ -165,8 +167,13 @@ export class Advbox implements INodeType {
 				const returnData: INodePropertyOptions[] = [];
 
 				try {
-					// Usar o método auxiliar para carregar dados do endpoint /settings
-					const response = await Advbox._loadSettingsData(this);
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
 
 					if (response && response.type_lawsuits && Array.isArray(response.type_lawsuits)) {
 						for (const typeLawsuit of response.type_lawsuits) {
