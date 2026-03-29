@@ -1,0 +1,30 @@
+[
+	{
+		"name": "lawsuitId",
+		"type": "uinteger",
+		"label": "Lawsuit ID",
+		"required": true,
+		"help": "ID of the lawsuit to get task history for."
+	},
+	{
+		"name": "status",
+		"type": "select",
+		"label": "Status",
+		"default": "all",
+		"help": "Filter tasks by status.",
+		"options": [
+			{
+				"label": "All",
+				"value": "all"
+			},
+			{
+				"label": "Pending",
+				"value": "pending"
+			},
+			{
+				"label": "Completed",
+				"value": "completed"
+			}
+		]
+	}
+]

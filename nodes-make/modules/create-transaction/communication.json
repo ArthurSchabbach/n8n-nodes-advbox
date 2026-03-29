@@ -1,0 +1,17 @@
+{
+	"url": "/transactions",
+	"method": "POST",
+	"body": {
+		"entry_type": "{{parameters.entry_type}}",
+		"users_id": "{{parameters.users_id}}",
+		"debit_account": "{{parameters.debit_account}}",
+		"categories_id": "{{parameters.categories_id}}",
+		"cost_centers_id": "{{parameters.cost_centers_id}}",
+		"amount": "{{parameters.amount}}",
+		"date_due": "{{parameters.date_due}}",
+		"{{...}}": "{{parameters.additionalFields}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

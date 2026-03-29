@@ -1,0 +1,10 @@
+{
+	"url": "/posts",
+	"method": "GET",
+	"qs": {
+		"{{...}}": "{{parameters}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

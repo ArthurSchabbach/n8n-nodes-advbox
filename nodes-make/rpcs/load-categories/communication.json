@@ -1,0 +1,7 @@
+{
+	"url": "/settings",
+	"method": "GET",
+	"response": {
+		"output": "{{body.categories}}"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"url": "/customers",
+	"method": "GET",
+	"qs": {
+		"{{...}}": "{{parameters}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

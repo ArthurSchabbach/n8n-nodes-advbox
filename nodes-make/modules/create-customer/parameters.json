@@ -1,0 +1,79 @@
+[
+	{
+		"name": "name",
+		"type": "text",
+		"label": "Name",
+		"required": true,
+		"help": "Name of the customer."
+	},
+	{
+		"name": "customers_origins_id",
+		"type": "select",
+		"label": "Customer Origin",
+		"required": true,
+		"options": {
+			"store": "rpc://loadCustomerOrigins"
+		},
+		"help": "Origin/source of the customer."
+	},
+	{
+		"name": "additionalFields",
+		"type": "collection",
+		"label": "Additional Fields",
+		"spec": [
+			{
+				"name": "users_id",
+				"type": "select",
+				"label": "Responsible User",
+				"options": {
+					"store": "rpc://loadUsers"
+				}
+			},
+			{
+				"name": "email",
+				"type": "email",
+				"label": "Email"
+			},
+			{
+				"name": "identification",
+				"type": "text",
+				"label": "Identification (CPF/CNPJ)"
+			},
+			{
+				"name": "phone",
+				"type": "text",
+				"label": "Phone"
+			},
+			{
+				"name": "cell_phone",
+				"type": "text",
+				"label": "Cell Phone"
+			},
+			{
+				"name": "birth_date",
+				"type": "date",
+				"label": "Birth Date"
+			},
+			{
+				"name": "address",
+				"type": "text",
+				"label": "Address"
+			},
+			{
+				"name": "city",
+				"type": "text",
+				"label": "City"
+			},
+			{
+				"name": "state",
+				"type": "text",
+				"label": "State"
+			},
+			{
+				"name": "zip_code",
+				"type": "text",
+				"label": "ZIP Code"
+			}
+		]
+	}
+]

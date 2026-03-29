@@ -1,0 +1,10 @@
+{
+	"url": "/lawsuits/{{parameters.lawsuitId}}",
+	"method": "PUT",
+	"body": {
+		"{{...}}": "{{parameters.updateFields}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

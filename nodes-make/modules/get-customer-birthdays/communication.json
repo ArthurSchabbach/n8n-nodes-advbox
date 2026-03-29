@@ -1,0 +1,11 @@
+{
+	"url": "/customers/birthdays",
+	"method": "GET",
+	"qs": {
+		"limit": "{{parameters.limit}}",
+		"offset": "{{parameters.offset}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

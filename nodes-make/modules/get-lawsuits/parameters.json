@@ -1,0 +1,34 @@
+[
+	{
+		"name": "stages_id",
+		"type": "select",
+		"label": "Stage",
+		"options": {
+			"store": "rpc://loadStages"
+		},
+		"help": "Filter by stage."
+	},
+	{
+		"name": "users_id",
+		"type": "select",
+		"label": "Responsible User",
+		"options": {
+			"store": "rpc://loadUsers"
+		},
+		"help": "Filter by responsible user."
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10,
+		"help": "Number of results to return (1-1000)."
+	},
+	{
+		"name": "offset",
+		"type": "uinteger",
+		"label": "Offset",
+		"default": 0,
+		"help": "Number of items to skip (pagination)."
+	}
+]

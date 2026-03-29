@@ -1,0 +1,28 @@
+[
+	{
+		"name": "lawsuits_id",
+		"type": "uinteger",
+		"label": "Lawsuit ID",
+		"required": true,
+		"help": "ID of the lawsuit to add the movement to."
+	},
+	{
+		"name": "description",
+		"type": "text",
+		"label": "Description",
+		"required": true,
+		"help": "Description of the manual movement."
+	},
+	{
+		"name": "additionalFields",
+		"type": "collection",
+		"label": "Additional Fields",
+		"spec": [
+			{
+				"name": "date",
+				"type": "date",
+				"label": "Movement Date"
+			}
+		]
+	}
+]

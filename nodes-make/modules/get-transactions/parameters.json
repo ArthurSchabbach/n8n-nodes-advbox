@@ -1,0 +1,100 @@
+[
+	{
+		"name": "process_number",
+		"type": "text",
+		"label": "Process Number",
+		"help": "Filter by process number."
+	},
+	{
+		"name": "customer_identification",
+		"type": "text",
+		"label": "Customer Identification (CPF/CNPJ)",
+		"help": "Filter by CPF or CNPJ."
+	},
+	{
+		"name": "responsible",
+		"type": "text",
+		"label": "Responsible",
+		"help": "Filter by responsible person name or ID."
+	},
+	{
+		"name": "lawsuit_id",
+		"type": "uinteger",
+		"label": "Lawsuit ID",
+		"help": "Filter by lawsuit ID."
+	},
+	{
+		"name": "customer_name",
+		"type": "text",
+		"label": "Customer Name",
+		"help": "Filter by customer name."
+	},
+	{
+		"name": "category",
+		"type": "text",
+		"label": "Category",
+		"help": "Filter by transaction category."
+	},
+	{
+		"name": "description",
+		"type": "text",
+		"label": "Description",
+		"help": "Filter by description."
+	},
+	{
+		"name": "cost_center",
+		"type": "text",
+		"label": "Cost Center",
+		"help": "Filter by cost center."
+	},
+	{
+		"name": "competence_start",
+		"type": "date",
+		"label": "Competence Start",
+		"help": "Start date for competence filter (YYYY-MM-DD)."
+	},
+	{
+		"name": "competence_end",
+		"type": "date",
+		"label": "Competence End",
+		"help": "End date for competence filter (YYYY-MM-DD)."
+	},
+	{
+		"name": "date_due_start",
+		"type": "date",
+		"label": "Due Date Start",
+		"help": "Start date for due date filter (YYYY-MM-DD)."
+	},
+	{
+		"name": "date_due_end",
+		"type": "date",
+		"label": "Due Date End",
+		"help": "End date for due date filter (YYYY-MM-DD)."
+	},
+	{
+		"name": "date_payment_start",
+		"type": "date",
+		"label": "Payment Date Start",
+		"help": "Start date for payment date filter (YYYY-MM-DD)."
+	},
+	{
+		"name": "date_payment_end",
+		"type": "date",
+		"label": "Payment Date End",
+		"help": "End date for payment date filter (YYYY-MM-DD)."
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10,
+		"help": "Number of results (1-1000)."
+	},
+	{
+		"name": "offset",
+		"type": "uinteger",
+		"label": "Offset",
+		"default": 0,
+		"help": "Pagination offset."
+	}
+]

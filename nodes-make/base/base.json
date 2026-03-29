@@ -1,0 +1,12 @@
+{
+	"baseUrl": "https://app.advbox.com.br/api/v1",
+	"headers": {
+		"Authorization": "Bearer {{connection.apiToken}}",
+		"Accept": "application/json",
+		"Content-Type": "application/json",
+		"{{...}}": "{{ifempty(connection.xAgent, omit, createObject('x-agent', connection.xAgent))}}"
+	},
+	"log": {
+		"sanitize": ["request.headers.authorization"]
+	}
+}

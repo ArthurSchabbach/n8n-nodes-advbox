@@ -1,0 +1,7 @@
+{
+	"url": "/lawsuits/{{parameters.lawsuitId}}",
+	"method": "GET",
+	"response": {
+		"output": "{{body}}"
+	}
+}

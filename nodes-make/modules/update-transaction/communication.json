@@ -1,0 +1,10 @@
+{
+	"url": "/transactions/{{parameters.transactionId}}",
+	"method": "PUT",
+	"body": {
+		"{{...}}": "{{parameters.updateFields}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"url": "/history/{{parameters.lawsuitId}}/",
+	"method": "GET",
+	"qs": {
+		"status": "{{parameters.status}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

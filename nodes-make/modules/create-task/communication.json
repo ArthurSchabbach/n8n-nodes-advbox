@@ -1,0 +1,13 @@
+{
+	"url": "/posts",
+	"method": "POST",
+	"body": {
+		"lawsuits_id": "{{parameters.lawsuits_id}}",
+		"task_types_id": "{{parameters.task_types_id}}",
+		"title": "{{parameters.title}}",
+		"{{...}}": "{{parameters.additionalFields}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

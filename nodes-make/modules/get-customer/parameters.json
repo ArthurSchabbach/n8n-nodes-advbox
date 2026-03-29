@@ -1,0 +1,9 @@
+[
+	{
+		"name": "customerId",
+		"type": "uinteger",
+		"label": "Customer ID",
+		"required": true,
+		"help": "ID of the customer to retrieve."
+	}
+]

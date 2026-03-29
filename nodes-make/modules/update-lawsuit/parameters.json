@@ -1,0 +1,47 @@
+[
+	{
+		"name": "lawsuitId",
+		"type": "uinteger",
+		"label": "Lawsuit ID",
+		"required": true,
+		"help": "ID of the lawsuit to update."
+	},
+	{
+		"name": "updateFields",
+		"type": "collection",
+		"label": "Fields to Update",
+		"spec": [
+			{
+				"name": "stages_id",
+				"type": "select",
+				"label": "Stage",
+				"options": {
+					"store": "rpc://loadStages"
+				}
+			},
+			{
+				"name": "users_id",
+				"type": "select",
+				"label": "Responsible User",
+				"options": {
+					"store": "rpc://loadUsers"
+				}
+			},
+			{
+				"name": "title",
+				"type": "text",
+				"label": "Title"
+			},
+			{
+				"name": "process_number",
+				"type": "text",
+				"label": "Process Number"
+			},
+			{
+				"name": "description",
+				"type": "text",
+				"label": "Description"
+			}
+		]
+	}
+]

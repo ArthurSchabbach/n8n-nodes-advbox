@@ -1,0 +1,56 @@
+[
+	{
+		"name": "lawsuits_id",
+		"type": "uinteger",
+		"label": "Lawsuit ID",
+		"required": true,
+		"help": "ID of the lawsuit to associate the task with."
+	},
+	{
+		"name": "task_types_id",
+		"type": "select",
+		"label": "Task Type",
+		"required": true,
+		"options": {
+			"store": "rpc://loadTaskTypes"
+		},
+		"help": "Type of the task."
+	},
+	{
+		"name": "title",
+		"type": "text",
+		"label": "Title",
+		"required": true,
+		"help": "Title of the task."
+	},
+	{
+		"name": "additionalFields",
+		"type": "collection",
+		"label": "Additional Fields",
+		"spec": [
+			{
+				"name": "users_id",
+				"type": "select",
+				"label": "Responsible User",
+				"options": {
+					"store": "rpc://loadUsers"
+				}
+			},
+			{
+				"name": "description",
+				"type": "text",
+				"label": "Description"
+			},
+			{
+				"name": "date_start",
+				"type": "date",
+				"label": "Start Date"
+			},
+			{
+				"name": "date_end",
+				"type": "date",
+				"label": "End Date"
+			}
+		]
+	}
+]

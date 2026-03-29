@@ -1,0 +1,16 @@
+{
+	"url": "/settings",
+	"method": "GET",
+	"headers": {
+		"Authorization": "Bearer {{parameters.apiToken}}",
+		"Accept": "application/json"
+	},
+	"response": {
+		"valid": {
+			"condition": "{{statusCode}} === 200"
+		},
+		"error": {
+			"message": "Invalid API Token. Please check your credentials."
+		}
+	}
+}

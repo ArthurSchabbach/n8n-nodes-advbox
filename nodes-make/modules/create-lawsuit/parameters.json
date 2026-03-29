@@ -1,0 +1,67 @@
+[
+	{
+		"name": "customers_id",
+		"type": "uinteger",
+		"label": "Customer ID",
+		"required": true,
+		"help": "ID of the customer associated with this lawsuit."
+	},
+	{
+		"name": "lawsuits_types_id",
+		"type": "select",
+		"label": "Lawsuit Type",
+		"required": true,
+		"options": {
+			"store": "rpc://loadLawsuitTypes"
+		},
+		"help": "Type of the lawsuit."
+	},
+	{
+		"name": "stages_id",
+		"type": "select",
+		"label": "Stage",
+		"required": true,
+		"options": {
+			"store": "rpc://loadStages"
+		},
+		"help": "Initial stage of the lawsuit."
+	},
+	{
+		"name": "additionalFields",
+		"type": "collection",
+		"label": "Additional Fields",
+		"spec": [
+			{
+				"name": "users_id",
+				"type": "select",
+				"label": "Responsible User",
+				"options": {
+					"store": "rpc://loadUsers"
+				}
+			},
+			{
+				"name": "title",
+				"type": "text",
+				"label": "Title"
+			},
+			{
+				"name": "process_number",
+				"type": "text",
+				"label": "Process Number"
+			},
+			{
+				"name": "description",
+				"type": "text",
+				"label": "Description"
+			},
+			{
+				"name": "lawsuit_groups_id",
+				"type": "select",
+				"label": "Lawsuit Group",
+				"options": {
+					"store": "rpc://loadLawsuitGroups"
+				}
+			}
+		]
+	}
+]

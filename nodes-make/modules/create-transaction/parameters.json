@@ -1,0 +1,107 @@
+[
+	{
+		"name": "entry_type",
+		"type": "select",
+		"label": "Entry Type",
+		"required": true,
+		"options": [
+			{ "label": "Income (Crédito)", "value": "income" },
+			{ "label": "Expense (Débito)", "value": "expense" }
+		],
+		"help": "Transaction type: income (CRÉDITO) or expense (DÉBITO)."
+	},
+	{
+		"name": "users_id",
+		"type": "select",
+		"label": "Responsible User",
+		"required": true,
+		"options": {
+			"store": "rpc://loadUsers"
+		},
+		"help": "Responsible user for the transaction."
+	},
+	{
+		"name": "debit_account",
+		"type": "select",
+		"label": "Bank Account",
+		"required": true,
+		"options": {
+			"store": "rpc://loadBanks"
+		},
+		"help": "Bank account for this transaction."
+	},
+	{
+		"name": "categories_id",
+		"type": "select",
+		"label": "Category",
+		"required": true,
+		"options": {
+			"store": "rpc://loadCategories"
+		},
+		"help": "Financial category. Must match entry_type (income→CRÉDITO, expense→DÉBITO)."
+	},
+	{
+		"name": "cost_centers_id",
+		"type": "select",
+		"label": "Cost Center",
+		"required": true,
+		"options": {
+			"store": "rpc://loadCostCenters"
+		},
+		"help": "Cost center for this transaction."
+	},
+	{
+		"name": "amount",
+		"type": "number",
+		"label": "Amount (BRL)",
+		"required": true,
+		"help": "Transaction value in BRL. Must be greater than zero."
+	},
+	{
+		"name": "date_due",
+		"type": "date",
+		"label": "Due Date",
+		"required": true,
+		"help": "Due date (YYYY-MM-DD)."
+	},
+	{
+		"name": "additionalFields",
+		"type": "collection",
+		"label": "Additional Fields",
+		"spec": [
+			{
+				"name": "customers_id",
+				"type": "uinteger",
+				"label": "Customer ID",
+				"help": "Client ID. Populates name and identification."
+			},
+			{
+				"name": "lawsuits_id",
+				"type": "uinteger",
+				"label": "Lawsuit ID",
+				"help": "Case ID. Requires customers_id."
+			},
+			{
+				"name": "sectors_id",
+				"type": "select",
+				"label": "Department",
+				"options": {
+					"store": "rpc://loadDepartments"
+				},
+				"help": "Department/sector for this transaction."
+			},
+			{
+				"name": "description",
+				"type": "text",
+				"label": "Description",
+				"help": "Auto-converted to uppercase."
+			},
+			{
+				"name": "date_payment",
+				"type": "date",
+				"label": "Payment Date",
+				"help": "Cannot be a future date."
+			}
+		]
+	}
+]

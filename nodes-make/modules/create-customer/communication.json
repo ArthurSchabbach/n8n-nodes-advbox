@@ -1,0 +1,12 @@
+{
+	"url": "/customers",
+	"method": "POST",
+	"body": {
+		"name": "{{parameters.name}}",
+		"customers_origins_id": "{{parameters.customers_origins_id}}",
+		"{{...}}": "{{parameters.additionalFields}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

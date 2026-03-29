@@ -1,0 +1,10 @@
+{
+	"url": "/transactions",
+	"method": "GET",
+	"qs": {
+		"{{...}}": "{{parameters}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

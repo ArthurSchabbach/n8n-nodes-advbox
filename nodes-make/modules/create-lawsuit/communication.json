@@ -1,0 +1,13 @@
+{
+	"url": "/lawsuits",
+	"method": "POST",
+	"body": {
+		"customers_id": "{{parameters.customers_id}}",
+		"lawsuits_types_id": "{{parameters.lawsuits_types_id}}",
+		"stages_id": "{{parameters.stages_id}}",
+		"{{...}}": "{{parameters.additionalFields}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

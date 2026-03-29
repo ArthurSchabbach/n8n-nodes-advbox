@@ -1,0 +1,63 @@
+[
+	{
+		"name": "transactionId",
+		"type": "uinteger",
+		"label": "Transaction ID",
+		"required": true,
+		"help": "ID of the transaction to update."
+	},
+	{
+		"name": "updateFields",
+		"type": "collection",
+		"label": "Fields to Update",
+		"spec": [
+			{
+				"name": "entry_type",
+				"type": "select",
+				"label": "Entry Type",
+				"options": [
+					{ "label": "Income (Crédito)", "value": "income" },
+					{ "label": "Expense (Débito)", "value": "expense" }
+				],
+				"help": "Required when changing categories_id."
+			},
+			{
+				"name": "categories_id",
+				"type": "select",
+				"label": "Category",
+				"options": {
+					"store": "rpc://loadCategories"
+				},
+				"help": "Must send entry_type together."
+			},
+			{
+				"name": "amount",
+				"type": "number",
+				"label": "Amount (BRL)"
+			},
+			{
+				"name": "date_due",
+				"type": "date",
+				"label": "Due Date"
+			},
+			{
+				"name": "date_payment",
+				"type": "date",
+				"label": "Payment Date",
+				"help": "Use empty to mark as pending."
+			},
+			{
+				"name": "description",
+				"type": "text",
+				"label": "Description",
+				"help": "Auto-converted to uppercase."
+			},
+			{
+				"name": "competence",
+				"type": "text",
+				"label": "Competence",
+				"help": "Format: MM/YYYY (e.g. 05/2026)."
+			}
+		]
+	}
+]

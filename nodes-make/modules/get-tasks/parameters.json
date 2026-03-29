@@ -1,0 +1,37 @@
+[
+	{
+		"name": "date_start",
+		"type": "date",
+		"label": "Start Date",
+		"required": true,
+		"help": "Filter tasks from this date (YYYY-MM-DD)."
+	},
+	{
+		"name": "date_end",
+		"type": "date",
+		"label": "End Date",
+		"required": true,
+		"help": "Filter tasks until this date (YYYY-MM-DD)."
+	},
+	{
+		"name": "users_id",
+		"type": "select",
+		"label": "Responsible User",
+		"options": {
+			"store": "rpc://loadUsers"
+		},
+		"help": "Filter by responsible user."
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10
+	},
+	{
+		"name": "offset",
+		"type": "uinteger",
+		"label": "Offset",
+		"default": 0
+	}
+]

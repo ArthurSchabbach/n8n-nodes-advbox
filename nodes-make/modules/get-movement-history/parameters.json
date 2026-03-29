@@ -1,0 +1,21 @@
+[
+	{
+		"name": "lawsuitId",
+		"type": "uinteger",
+		"label": "Lawsuit ID",
+		"required": true,
+		"help": "ID of the lawsuit to get movement history for."
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10
+	},
+	{
+		"name": "offset",
+		"type": "uinteger",
+		"label": "Offset",
+		"default": 0
+	}
+]

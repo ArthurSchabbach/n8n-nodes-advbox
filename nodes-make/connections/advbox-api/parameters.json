@@ -1,0 +1,16 @@
+[
+	{
+		"name": "apiToken",
+		"type": "text",
+		"label": "API Token",
+		"required": true,
+		"help": "Your ADVBOX API token. Found in ADVBOX settings."
+	},
+	{
+		"name": "xAgent",
+		"type": "text",
+		"label": "Agent Identifier (optional)",
+		"required": false,
+		"help": "Optional agent identifier sent in the x-agent header."
+	}
+]

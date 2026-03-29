@@ -1,0 +1,16 @@
+[
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10,
+		"help": "Number of results to return (1-1000)."
+	},
+	{
+		"name": "offset",
+		"type": "uinteger",
+		"label": "Offset",
+		"default": 0,
+		"help": "Number of items to skip (pagination)."
+	}
+]
