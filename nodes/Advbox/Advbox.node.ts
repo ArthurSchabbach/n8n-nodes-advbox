@@ -203,8 +203,9 @@ export class Advbox implements INodeType {
 						headers: { 'Accept': 'application/json' },
 					} as IHttpRequestOptions);
 
-					if (response && response.banks && Array.isArray(response.banks)) {
-						for (const bank of response.banks) {
+					const banks = response?.banks || response?.financial?.banks;
+					if (banks && Array.isArray(banks)) {
+						for (const bank of banks) {
 							const label = bank.institution ? `${bank.name} (${bank.institution})` : bank.name;
 							returnData.push({
 								name: label,
@@ -231,8 +232,9 @@ export class Advbox implements INodeType {
 						headers: { 'Accept': 'application/json' },
 					} as IHttpRequestOptions);
 
-					if (response && response.categories && Array.isArray(response.categories)) {
-						for (const cat of response.categories) {
+					const categories = response?.categories || response?.financial?.categories;
+					if (categories && Array.isArray(categories)) {
+						for (const cat of categories) {
 							returnData.push({
 								name: `${cat.category} (${cat.type})`,
 								value: cat.id,
@@ -259,8 +261,9 @@ export class Advbox implements INodeType {
 						headers: { 'Accept': 'application/json' },
 					} as IHttpRequestOptions);
 
-					if (response && response.cost_centers && Array.isArray(response.cost_centers)) {
-						for (const cc of response.cost_centers) {
+					const costCenters = response?.cost_centers || response?.financial?.cost_centers;
+					if (costCenters && Array.isArray(costCenters)) {
+						for (const cc of costCenters) {
 							returnData.push({
 								name: cc.cost_center,
 								value: cc.id,
@@ -286,8 +289,9 @@ export class Advbox implements INodeType {
 						headers: { 'Accept': 'application/json' },
 					} as IHttpRequestOptions);
 
-					if (response && response.departments && Array.isArray(response.departments)) {
-						for (const dept of response.departments) {
+					const departments = response?.departments || response?.financial?.departments;
+					if (departments && Array.isArray(departments)) {
+						for (const dept of departments) {
 							returnData.push({
 								name: dept.sector,
 								value: dept.id,
