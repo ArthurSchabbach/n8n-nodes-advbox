@@ -1904,7 +1904,7 @@ export class Advbox implements INodeType {
 				name: 'debit_account',
 				type: 'options',
 				required: true,
-				default: 0,
+				default: '',
 				description: 'Bank account for this transaction',
 				typeOptions: {
 					loadOptionsMethod: 'loadBanks',
@@ -1921,7 +1921,7 @@ export class Advbox implements INodeType {
 				name: 'categories_id',
 				type: 'options',
 				required: true,
-				default: 0,
+				default: '',
 				description: 'Financial category. Must match entry_type (income→CRÉDITO, expense→DÉBITO).',
 				typeOptions: {
 					loadOptionsMethod: 'loadCategories',
@@ -1938,7 +1938,7 @@ export class Advbox implements INodeType {
 				name: 'cost_centers_id',
 				type: 'options',
 				required: true,
-				default: 0,
+				default: '',
 				description: 'Cost center for this transaction',
 				typeOptions: {
 					loadOptionsMethod: 'loadCostCenters',
@@ -2010,7 +2010,7 @@ export class Advbox implements INodeType {
 						displayName: 'Department',
 						name: 'sectors_id',
 						type: 'options',
-						default: 0,
+						default: '',
 						description: 'Department/sector for this transaction',
 						typeOptions: {
 							loadOptionsMethod: 'loadDepartments',
@@ -2086,7 +2086,7 @@ export class Advbox implements INodeType {
 						displayName: 'Category',
 						name: 'categories_id',
 						type: 'options',
-						default: 0,
+						default: '',
 						description: 'Financial category. Must send entry_type together.',
 						typeOptions: {
 							loadOptionsMethod: 'loadCategories',
