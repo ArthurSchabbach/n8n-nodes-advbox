@@ -191,6 +191,115 @@ export class Advbox implements INodeType {
 				return returnData;
 			},
 
+			async loadBanks(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+				const returnData: INodePropertyOptions[] = [];
+
+				try {
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
+
+					if (response && response.banks && Array.isArray(response.banks)) {
+						for (const bank of response.banks) {
+							const label = bank.institution ? `${bank.name} (${bank.institution})` : bank.name;
+							returnData.push({
+								name: label,
+								value: bank.id,
+							});
+						}
+					}
+				} catch (error) {
+					// ignore - return empty array
+				}
+
+				return returnData;
+			},
+
+			async loadCategories(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+				const returnData: INodePropertyOptions[] = [];
+
+				try {
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
+
+					if (response && response.categories && Array.isArray(response.categories)) {
+						for (const cat of response.categories) {
+							returnData.push({
+								name: `${cat.category} (${cat.type})`,
+								value: cat.id,
+								description: `Type: ${cat.type}`,
+							});
+						}
+					}
+				} catch (error) {
+					// ignore - return empty array
+				}
+
+				return returnData;
+			},
+
+			async loadCostCenters(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+				const returnData: INodePropertyOptions[] = [];
+
+				try {
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
+
+					if (response && response.cost_centers && Array.isArray(response.cost_centers)) {
+						for (const cc of response.cost_centers) {
+							returnData.push({
+								name: cc.cost_center,
+								value: cc.id,
+							});
+						}
+					}
+				} catch (error) {
+					// ignore - return empty array
+				}
+
+				return returnData;
+			},
+
+			async loadDepartments(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+				const returnData: INodePropertyOptions[] = [];
+
+				try {
+					const credentials = await this.getCredentials('advboxApi');
+					const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
+					const response: any = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', {
+						method: 'GET',
+						url: `${baseUrl}/settings`,
+						headers: { 'Accept': 'application/json' },
+					} as IHttpRequestOptions);
+
+					if (response && response.departments && Array.isArray(response.departments)) {
+						for (const dept of response.departments) {
+							returnData.push({
+								name: dept.sector,
+								value: dept.id,
+							});
+						}
+					}
+				} catch (error) {
+					// ignore - return empty array
+				}
+
+				return returnData;
+			},
 
 		},
 	}
@@ -1787,12 +1896,15 @@ export class Advbox implements INodeType {
 				},
 			},
 			{
-				displayName: 'Debit Account (Bank ID)',
+				displayName: 'Bank Account',
 				name: 'debit_account',
-				type: 'number',
+				type: 'options',
 				required: true,
 				default: 0,
-				description: 'Bank account ID. Obtain from GET /settings → financial.banks[].',
+				description: 'Bank account for this transaction',
+				typeOptions: {
+					loadOptionsMethod: 'loadBanks',
+				},
 				displayOptions: {
 					show: {
 						resource: ['transaction'],
@@ -1801,12 +1913,15 @@ export class Advbox implements INodeType {
 				},
 			},
 			{
-				displayName: 'Category ID',
+				displayName: 'Category',
 				name: 'categories_id',
-				type: 'number',
+				type: 'options',
 				required: true,
 				default: 0,
-				description: 'Financial category ID. Must match entry_type (income→CRÉDITO, expense→DÉBITO). Obtain from GET /settings → financial.categories[].',
+				description: 'Financial category. Must match entry_type (income→CRÉDITO, expense→DÉBITO).',
+				typeOptions: {
+					loadOptionsMethod: 'loadCategories',
+				},
 				displayOptions: {
 					show: {
 						resource: ['transaction'],
@@ -1815,12 +1930,15 @@ export class Advbox implements INodeType {
 				},
 			},
 			{
-				displayName: 'Cost Center ID',
+				displayName: 'Cost Center',
 				name: 'cost_centers_id',
-				type: 'number',
+				type: 'options',
 				required: true,
 				default: 0,
-				description: 'Cost center ID. Obtain from GET /settings → financial.cost_centers[].',
+				description: 'Cost center for this transaction',
+				typeOptions: {
+					loadOptionsMethod: 'loadCostCenters',
+				},
 				displayOptions: {
 					show: {
 						resource: ['transaction'],
@@ -1885,11 +2003,14 @@ export class Advbox implements INodeType {
 						description: 'Case/lawsuit ID. Requires customers_id to be set.',
 					},
 					{
-						displayName: 'Sector ID',
+						displayName: 'Department',
 						name: 'sectors_id',
-						type: 'number',
+						type: 'options',
 						default: 0,
-						description: 'Sector ID. Must belong to the authenticated office.',
+						description: 'Department/sector for this transaction',
+						typeOptions: {
+							loadOptionsMethod: 'loadDepartments',
+						},
 					},
 					{
 						displayName: 'Description',
@@ -1958,11 +2079,14 @@ export class Advbox implements INodeType {
 						],
 					},
 					{
-						displayName: 'Category ID',
+						displayName: 'Category',
 						name: 'categories_id',
-						type: 'number',
+						type: 'options',
 						default: 0,
-						description: 'Financial category ID. Must send entry_type together.',
+						description: 'Financial category. Must send entry_type together.',
+						typeOptions: {
+							loadOptionsMethod: 'loadCategories',
+						},
 					},
 					{
 						displayName: 'Amount',
