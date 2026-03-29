@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-advbox",
-  "version": "1.0.39",
+  "version": "1.0.40",
   "description": "n8n community node for ADVBOX API - manage customers, lawsuits, tasks, movements, transactions and settings",
   "keywords": [
     "n8n-community-node-package",
@@ -14,7 +14,7 @@
   "homepage": "https://github.com/ArthurSchabbach/n8n-nodes-advbox#readme",
   "author": {
     "name": "ADVBOX",
-    "email": "contato@advbox.com.br"
+    "email": "developer@advbox.com.br"
   },
   "main": "index.js",
   "engines": {
