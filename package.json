@@ -1,0 +1,56 @@
+{
+  "name": "n8n-nodes-advbox",
+  "version": "1.0.39",
+  "description": "n8n community node for ADVBOX API - manage customers, lawsuits, tasks, movements, transactions and settings",
+  "keywords": [
+    "n8n-community-node-package",
+    "advbox",
+    "api",
+    "legal",
+    "law",
+    "crm"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ArthurSchabbach/n8n-nodes-advbox#readme",
+  "author": {
+    "name": "ADVBOX",
+    "email": "contato@advbox.com.br"
+  },
+  "main": "index.js",
+  "engines": {
+    "n8n": ">=0.125.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArthurSchabbach/n8n-nodes-advbox.git"
+  },
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "lint": "eslint nodes/ credentials/ --ext .ts",
+    "lintfix": "eslint nodes/ credentials/ --ext .ts --fix"
+  },
+  "files": [
+    "dist",
+    "index.js"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/AdvboxApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Advbox/Advbox.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.56.0",
+    "gulp": "^4.0.2",
+    "n8n-core": "^0.125.0",
+    "n8n-workflow": "^0.107.0",
+    "typescript": "~4.8.4"
+  }
+}
