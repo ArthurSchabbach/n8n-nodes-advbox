@@ -4,106 +4,32 @@ import {
 	INodeType,
 	INodeTypeDescription,
 	ILoadOptionsFunctions,
-	ICredentialDataDecryptedObject,
 	INodePropertyOptions,
 	NodeOperationError,
 	IDataObject,
-	IHttpRequestMethods,
 	IHttpRequestOptions,
 } from 'n8n-workflow';
 
-
-
 export class Advbox implements INodeType {
-	credentialTypes = [
-		'advboxApi',
-	];
 
-	// Método auxiliar para preparar opções de requisição HTTP
-	static prepareRequestOptions(credentials: ICredentialDataDecryptedObject, endpoint: string, method: IHttpRequestMethods, qs = {}, body = {}): IHttpRequestOptions {
-		return Advbox._prepareRequestOptionsImpl(credentials, endpoint, method, qs, body);
-	}
-
-	prepareRequestOptions(credentials: ICredentialDataDecryptedObject, endpoint: string, method: IHttpRequestMethods, qs = {}, body = {}): IHttpRequestOptions {
-		return Advbox._prepareRequestOptionsImpl(credentials, endpoint, method, qs, body);
-	}
-
-	private static _prepareRequestOptionsImpl(credentials: ICredentialDataDecryptedObject, endpoint: string, method: IHttpRequestMethods, qs = {}, body = {}): IHttpRequestOptions {
-		// Garantir que o token não está vazio e remover espaços em branco
-		const apiToken = credentials.apiToken ? (credentials.apiToken as string).trim() : '';
-		if (!apiToken) {
-			throw new Error('API Token não fornecido ou inválido. Verifique suas credenciais.');
-		}
-
-		// Garantir que a URL da API está correta
-		const apiUrl = credentials.apiUrl ? (credentials.apiUrl as string).trim() : '';
-		if (!apiUrl) {
-			throw new Error('URL da API não fornecida ou inválida. Verifique suas credenciais.');
-		}
-
-		// Construir a URL completa garantindo que não há barras duplicadas
-		const baseUrl = apiUrl.endsWith('/') ? apiUrl.slice(0, -1) : apiUrl;
-		const fullUrl = `${baseUrl}${endpoint}`;
-
-		// Simplificando os headers para evitar problemas de tipagem
-		const headers: Record<string, string> = {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-			'Authorization': `Bearer ${apiToken}`,
-		};
-
-		// Adiciona x-agent APENAS se existir e não estiver vazio
-		if (credentials.xAgent && typeof credentials.xAgent === 'string' && (credentials.xAgent as string).trim() !== '') {
-			headers['x-agent'] = (credentials.xAgent as string).trim();
-		}
-
-		return {
-			method,
-			url: fullUrl,
-			headers,
-			qs,
-			body,
-		};
-	}
-
-	// Método auxiliar específico para carregar dados do endpoint /settings
-	// Implementado para garantir compatibilidade com a versão 0.1.88
-	private static async _loadSettingsData(loadOptionsFunctions: ILoadOptionsFunctions) {
+	private static async _loadSettingsData(loadOptionsFunctions: ILoadOptionsFunctions): Promise<any> {
 		try {
-			// Obter credenciais
 			const credentials = await loadOptionsFunctions.getCredentials('advboxApi');
+			const baseUrl = ((credentials.apiUrl as string) || '').replace(/\/$/, '');
 
-			if (!credentials) {
-				throw new Error('Credenciais não encontradas');
-			}
+			const options: IHttpRequestOptions = {
+				method: 'GET',
+				url: `${baseUrl}/settings`,
+				headers: {
+					'Accept': 'application/json',
+				},
+			};
 
-			// Usar a função prepareRequestOptions para garantir consistência
-			const options = Advbox._prepareRequestOptionsImpl(
-				credentials, 
-				'/settings', 
-				'GET'
+			return await loadOptionsFunctions.helpers.requestWithAuthentication.call(
+				loadOptionsFunctions,
+				'advboxApi',
+				options,
 			);
-
-			// Fazer a requisição com retry em caso de falha
-			let response: any;
-			let retries = 3;
-			let success = false;
-
-			while (retries > 0 && !success) {
-				try {
-					response = await loadOptionsFunctions.helpers?.httpRequest?.(options) || {};
-					success = true;
-				} catch (error) {
-					retries--;
-					if (retries === 0) {
-						throw error;
-					}
-					// Esperar 1 segundo antes de tentar novamente
-					await new Promise(resolve => setTimeout(resolve, 1000));
-				}
-			}
-
-			return response;
 		} catch (error) {
 			return {};
 		}
@@ -2342,14 +2268,12 @@ export class Advbox implements INodeType {
 							url: `${credentials.apiUrl}/customers`,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 							body,
 						};
 
-						responseData = await this.helpers.httpRequest(customerCreateOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',customerCreateOptions);
 					}
 					else if (operation === 'get') {
 						// ----------------------------------
@@ -2363,13 +2287,11 @@ export class Advbox implements INodeType {
 							url: `${credentials.apiUrl}/customers/${customerId}`,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(customerOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',customerOptions);
 					}
 					else if (operation === 'getAll') {
 						// ----------------------------------
@@ -2446,15 +2368,17 @@ export class Advbox implements INodeType {
 							qs.offset = additionalFields.offset;
 						}
 
-						// Usar o método auxiliar para preparar as opções de requisição
-						const customerAllOptions = Advbox.prepareRequestOptions(
-							credentials,
-							'/customers',
-							'GET',
-							qs
-						);
+						const customerAllOptions: IHttpRequestOptions = {
+							method: 'GET',
+							url: `${credentials.apiUrl}/customers`,
+							qs,
+							headers: {
+								'Accept': 'application/json',
+								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
+							},
+						};
 
-						responseData = await this.helpers.httpRequest(customerAllOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', customerAllOptions);
 					}
 					else if (operation === 'getBirthdays') {
 						// ----------------------------------
@@ -2482,13 +2406,11 @@ export class Advbox implements INodeType {
 							qs,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(birthdayOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',birthdayOptions);
 					}
 				}
 				else if (resource === 'lawsuit') {
@@ -2555,14 +2477,12 @@ export class Advbox implements INodeType {
 							url: `${credentials.apiUrl}/lawsuits`,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 							body,
 						};
 
-						responseData = await this.helpers.httpRequest(lawsuitCreateOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',lawsuitCreateOptions);
 					}
 					else if (operation === 'get') {
 						// ----------------------------------
@@ -2576,13 +2496,11 @@ export class Advbox implements INodeType {
 							url: `${credentials.apiUrl}/lawsuits/${lawsuitId}`,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(lawsuitOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',lawsuitOptions);
 					}
 					else if (operation === 'getAll') {
 						// ----------------------------------
@@ -2655,13 +2573,11 @@ export class Advbox implements INodeType {
 							qs,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(lawsuitOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',lawsuitOptions);
 					}
 					else if (operation === 'getTaskHistory') {
 						// ----------------------------------
@@ -2685,13 +2601,11 @@ export class Advbox implements INodeType {
 							qs,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(historyOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',historyOptions);
 					}
 else if (operation === 'update') {
 	// ----------------------------------
@@ -2725,13 +2639,11 @@ else if (operation === 'update') {
 							body,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(updateOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',updateOptions);
 					}
 
 				}
@@ -2813,15 +2725,13 @@ else if (operation === 'update') {
 							body: taskData,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
 						// Fazer a requisição e retornar diretamente a resposta
 						// Sem formatação adicional para evitar problemas
-						responseData = await this.helpers.httpRequest(taskOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',taskOptions);
 					}
 					else if (operation === 'get') {
 						// ----------------------------------
@@ -2835,13 +2745,11 @@ else if (operation === 'update') {
 							url: `${credentials.apiUrl}/posts/${taskId}`,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(taskOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',taskOptions);
 					}
 					else if (operation === 'getHistory') {
 						// ----------------------------------
@@ -2869,13 +2777,11 @@ else if (operation === 'update') {
 							qs,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(historyOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',historyOptions);
 					}
 					else if (operation === 'getTasks') {
 						// ----------------------------------
@@ -2979,14 +2885,12 @@ else if (operation === 'update') {
 							qs,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
 						try {
-							responseData = await this.helpers.httpRequest(taskOptions);
+							responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',taskOptions);
 						} catch (error) {
 							throw new NodeOperationError(this.getNode(),
 								`Erro na requisição GET /posts: ${error instanceof Error ? error.message : 'Erro desconhecido'}. Verifique os parâmetros e credenciais.`, 
@@ -3026,13 +2930,11 @@ else if (operation === 'update') {
 							body: movementData,
 							headers: {
 								'Accept': 'application/json',
-								'Content-Type': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(movementOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',movementOptions);
 					}
 					else if (operation === 'getHistory') {
 						// ----------------------------------
@@ -3050,14 +2952,17 @@ else if (operation === 'update') {
 							qs.origin = additionalFields.origin;
 						}
 
-						const historyOptions = Advbox.prepareRequestOptions(
-							credentials,
-							`/movements/${lawsuitId}`,
-							'GET',
-							qs
-						);
+						const historyOptions: IHttpRequestOptions = {
+							method: 'GET',
+							url: `${credentials.apiUrl}/movements/${lawsuitId}`,
+							qs,
+							headers: {
+								'Accept': 'application/json',
+								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
+							},
+						};
 
-						responseData = await this.helpers.httpRequest(historyOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', historyOptions);
 					}
 				}
 
@@ -3142,12 +3047,11 @@ else if (operation === 'update') {
 							qs,
 							headers: {
 								'Accept': 'application/json',
-								'Authorization': `Bearer ${credentials.apiToken}`,
 								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
 							},
 						};
 
-						responseData = await this.helpers.httpRequest(transactionOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',transactionOptions);
 					}
 
 					else if (operation === 'create') {
@@ -3190,15 +3094,17 @@ else if (operation === 'update') {
 							body.date_payment = additionalFields.date_payment;
 						}
 
-						const createOptions = Advbox.prepareRequestOptions(
-							credentials,
-							'/transactions',
-							'POST',
-							{},
+						const createOptions: IHttpRequestOptions = {
+							method: 'POST',
+							url: `${credentials.apiUrl}/transactions`,
 							body,
-						);
+							headers: {
+								'Accept': 'application/json',
+								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
+							},
+						};
 
-						responseData = await this.helpers.httpRequest(createOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',createOptions);
 					}
 
 					else if (operation === 'update') {
@@ -3233,15 +3139,17 @@ else if (operation === 'update') {
 							body.competence = updateFields.competence;
 						}
 
-						const updateOptions = Advbox.prepareRequestOptions(
-							credentials,
-							`/transactions/${transactionId}`,
-							'PUT',
-							{},
+						const updateOptions: IHttpRequestOptions = {
+							method: 'PUT',
+							url: `${credentials.apiUrl}/transactions/${transactionId}`,
 							body,
-						);
+							headers: {
+								'Accept': 'application/json',
+								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
+							},
+						};
 
-						responseData = await this.helpers.httpRequest(updateOptions);
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',updateOptions);
 					}
 				}
 				else if (resource === 'settings') {
@@ -3250,35 +3158,16 @@ else if (operation === 'update') {
 					// *********************************************************************
 
 					if (operation === 'get') {
-						// ----------------------------------
-						//         settings:get
-						// ----------------------------------
+						const settingsOptions: IHttpRequestOptions = {
+							method: 'GET',
+							url: `${credentials.apiUrl}/settings`,
+							headers: {
+								'Accept': 'application/json',
+								...((credentials.xAgent as string) ? { 'x-agent': credentials.xAgent as string } : {}),
+							},
+						};
 
-						// Usar o método auxiliar para carregar dados do endpoint /settings
-						// Adaptação para o método execute que não tem acesso direto ao método _loadSettingsData
-						const options = Advbox._prepareRequestOptionsImpl(
-							credentials, 
-							'/settings', 
-							'GET'
-						);
-
-						// Implementar retry para garantir compatibilidade com a versão 0.1.88
-						let retries = 3;
-						let success = false;
-
-						while (retries > 0 && !success) {
-							try {
-								responseData = await this.helpers.httpRequest(options);
-								success = true;
-							} catch (error) {
-								retries--;
-								if (retries === 0) {
-									throw error;
-								}
-								// Esperar 1 segundo antes de tentar novamente
-								await new Promise(resolve => setTimeout(resolve, 1000));
-							}
-						}
+						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi', settingsOptions);
 					}
 				}
 

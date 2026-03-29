@@ -1,4 +1,6 @@
 import {
+	IAuthenticateGeneric,
+	ICredentialTestRequest,
 	ICredentialType,
 	INodeProperties,
 } from 'n8n-workflow';
@@ -12,6 +14,7 @@ export class AdvboxApi implements ICredentialType {
 			displayName: 'API Token',
 			name: 'apiToken',
 			type: 'string',
+			typeOptions: { password: true },
 			default: '',
 			required: true,
 			description: 'The ADVBOX API token',
@@ -33,4 +36,21 @@ export class AdvboxApi implements ICredentialType {
 			description: 'Optional agent identifier to be sent in x-agent header',
 		},
 	];
+
+	authenticate: IAuthenticateGeneric = {
+		type: 'generic',
+		properties: {
+			headers: {
+				Authorization: '=Bearer {{$credentials.apiToken}}',
+			},
+		},
+	};
+
+	test: ICredentialTestRequest = {
+		request: {
+			baseURL: '={{$credentials.apiUrl}}',
+			url: '/settings',
+			method: 'GET',
+		},
+	};
 }
