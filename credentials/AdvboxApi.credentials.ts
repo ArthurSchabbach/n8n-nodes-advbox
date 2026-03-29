@@ -5,6 +5,8 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
+const API_BASE_URL = 'https://app.advbox.com.br/api/v1';
+
 export class AdvboxApi implements ICredentialType {
 	name = 'advboxApi';
 	displayName = 'ADVBOX API';
@@ -22,10 +24,8 @@ export class AdvboxApi implements ICredentialType {
 		{
 			displayName: 'API URL',
 			name: 'apiUrl',
-			type: 'string',
-			default: 'https://app.advbox.com.br/api/v1',
-			required: true,
-			description: 'The URL to the ADVBOX API',
+			type: 'hidden',
+			default: API_BASE_URL,
 		},
 		{
 			displayName: 'Agent Identifier',
@@ -48,7 +48,7 @@ export class AdvboxApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '={{$credentials.apiUrl}}',
+			baseURL: API_BASE_URL,
 			url: '/settings',
 			method: 'GET',
 		},
