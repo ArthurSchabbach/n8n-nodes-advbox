@@ -11,9 +11,7 @@
 		"type": "select",
 		"label": "Customer Origin",
 		"required": true,
-		"options": {
-			"store": "rpc://loadCustomerOrigins"
-		},
+		"options": "rpc://loadOrigins",
 		"help": "Origin/source of the customer."
 	},
 	{
@@ -25,9 +23,7 @@
 				"name": "users_id",
 				"type": "select",
 				"label": "Responsible User",
-				"options": {
-					"store": "rpc://loadUsers"
-				}
+				"options": "rpc://loadUsers"
 			},
 			{
 				"name": "email",
@@ -40,24 +36,34 @@
 				"label": "Identification (CPF/CNPJ)"
 			},
 			{
+				"name": "document",
+				"type": "text",
+				"label": "Document Number"
+			},
+			{
 				"name": "phone",
 				"type": "text",
 				"label": "Phone"
 			},
 			{
-				"name": "cell_phone",
+				"name": "cellphone",
 				"type": "text",
 				"label": "Cell Phone"
 			},
 			{
-				"name": "birth_date",
+				"name": "birthdate",
 				"type": "date",
 				"label": "Birth Date"
 			},
 			{
-				"name": "address",
+				"name": "occupation",
 				"type": "text",
-				"label": "Address"
+				"label": "Occupation"
+			},
+			{
+				"name": "postalcode",
+				"type": "text",
+				"label": "ZIP Code"
 			},
 			{
 				"name": "city",
@@ -70,9 +76,9 @@
 				"label": "State"
 			},
 			{
-				"name": "zip_code",
+				"name": "notes",
 				"type": "text",
-				"label": "ZIP Code"
+				"label": "Notes"
 			}
 		]
 	}

@@ -1,0 +1,9 @@
+[
+	{
+		"name": "taskId",
+		"type": "uinteger",
+		"label": "Task ID",
+		"required": true,
+		"help": "ID of the task to retrieve."
+	}
+]

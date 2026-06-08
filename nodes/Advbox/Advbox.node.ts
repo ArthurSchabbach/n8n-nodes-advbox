@@ -5,7 +5,10 @@ import {
 	INodeTypeDescription,
 	ILoadOptionsFunctions,
 	INodePropertyOptions,
+	NodeConnectionTypes,
 	NodeOperationError,
+	NodeApiError,
+	JsonObject,
 	IDataObject,
 	IHttpRequestOptions,
 } from 'n8n-workflow';
@@ -36,13 +39,13 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load users', { error });
 				}
 
 				return returnData;
 			},
 
-			// Método para carregar opções de origens de clientes
+			// Load customer origins options
 			async loadCustomerOrigins(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
 
@@ -65,13 +68,13 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load customer origins', { error });
 				}
 
 				return returnData;
 			},
 
-			// Método para carregar opções de tipos de tarefas
+			// Load task types options
 			async loadTaskTypes(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
 
@@ -94,13 +97,13 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load task types', { error });
 				}
 
 				return returnData;
 			},
 
-			// Método para carregar opções de estágios (stages)
+			// Load stages options
 			async loadStages(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
 
@@ -123,13 +126,13 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load stages', { error });
 				}
 
 				return returnData;
 			},
 
-			// Método para carregar opções de grupos de processos
+			// Load lawsuit groups options
 			async loadLawsuitGroups(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
 				const uniqueGroups = new Set<string>();
@@ -144,7 +147,7 @@ export class Advbox implements INodeType {
 					} as IHttpRequestOptions);
 
 					if (response && response.type_lawsuits && Array.isArray(response.type_lawsuits)) {
-						// Extrair grupos únicos
+						// Extract unique groups
 						for (const typeLawsuit of response.type_lawsuits) {
 							if (typeLawsuit.group && !uniqueGroups.has(typeLawsuit.group)) {
 								uniqueGroups.add(typeLawsuit.group);
@@ -156,13 +159,13 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load lawsuit groups', { error });
 				}
 
 				return returnData;
 			},
 
-			// Método para carregar opções de tipos de processos
+			// Load lawsuit types options
 			async loadLawsuitTypes(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
 
@@ -185,7 +188,7 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load lawsuit types', { error });
 				}
 
 				return returnData;
@@ -214,7 +217,7 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load banks', { error });
 				}
 
 				return returnData;
@@ -243,7 +246,7 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load categories', { error });
 				}
 
 				return returnData;
@@ -271,7 +274,7 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load cost centers', { error });
 				}
 
 				return returnData;
@@ -299,7 +302,7 @@ export class Advbox implements INodeType {
 						}
 					}
 				} catch (error) {
-					// ignore - return empty array
+					this.logger.error('Failed to load departments', { error });
 				}
 
 				return returnData;
@@ -319,8 +322,8 @@ export class Advbox implements INodeType {
 		defaults: {
 			name: 'Advbox',
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'advboxApi',
@@ -1001,7 +1004,7 @@ export class Advbox implements INodeType {
 								value: 'MARKETING',
 							},
 							{
-								name: 'Negociação',
+								name: 'Negotiation',
 								value: 'NEGOCIACAO',
 							},
 							{
@@ -1021,11 +1024,11 @@ export class Advbox implements INodeType {
 								value: 'RECURSAL',
 							},
 							{
-								name: 'Execução/Cobrança',
+								name: 'Enforcement/Collection',
 								value: 'EXECUCAO_COBRANCA',
 							},
 							{
-								name: 'RH/Financeiro',
+								name: 'HR/Finance',
 								value: 'RH_FINANCEIRO',
 							},
 							{
@@ -1750,7 +1753,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'ID do processo relacionado ao movimento',
+				description: 'ID of the lawsuit related to the movement',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1763,13 +1766,13 @@ export class Advbox implements INodeType {
 				},
 			},
 			{
-				displayName: 'Data do Movimento',
+				displayName: 'Movement Date',
 				name: 'date',
 				type: 'string',
 				required: true,
 				default: '',
 				placeholder: 'DD/MM/YYYY',
-				description: 'Data do movimento no formato DD/MM/YYYY',
+				description: 'Movement date in DD/MM/YYYY format',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1782,12 +1785,12 @@ export class Advbox implements INodeType {
 				},
 			},
 			{
-				displayName: 'Descrição',
+				displayName: 'Description',
 				name: 'description',
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'Descrição do movimento',
+				description: 'Movement description',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1849,7 +1852,7 @@ export class Advbox implements INodeType {
 								value: 'manual',
 							},
 						],
-						description: 'Filtrar movimentos por origem (tribunal ou manual)',
+						description: 'Filter movements by origin (court or manual)',
 					},
 				],
 			},
@@ -1862,7 +1865,7 @@ export class Advbox implements INodeType {
 				type: 'options',
 				required: true,
 				default: 'income',
-				description: 'Transaction type: income (CRÉDITO) or expense (DÉBITO)',
+				description: 'Transaction type: income (credit) or expense (debit)',
 				displayOptions: {
 					show: {
 						resource: ['transaction'],
@@ -1873,12 +1876,12 @@ export class Advbox implements INodeType {
 					{
 						name: 'Income',
 						value: 'income',
-						description: 'Credit transaction (CRÉDITO)',
+						description: 'Credit transaction',
 					},
 					{
 						name: 'Expense',
 						value: 'expense',
-						description: 'Debit transaction (DÉBITO)',
+						description: 'Debit transaction',
 					},
 				],
 			},
@@ -1922,7 +1925,7 @@ export class Advbox implements INodeType {
 				type: 'options',
 				required: true,
 				default: '',
-				description: 'Financial category. Must match entry_type (income→CRÉDITO, expense→DÉBITO).',
+				description: 'Financial category. Must match entry_type (income or expense).',
 				typeOptions: {
 					loadOptionsMethod: 'loadCategories',
 				},
@@ -2073,12 +2076,12 @@ export class Advbox implements INodeType {
 							{
 								name: 'Income',
 								value: 'income',
-								description: 'Credit transaction (CRÉDITO)',
+								description: 'Credit transaction',
 							},
 							{
 								name: 'Expense',
 								value: 'expense',
-								description: 'Debit transaction (DÉBITO)',
+								description: 'Debit transaction',
 							},
 						],
 					},
@@ -2349,7 +2352,7 @@ export class Advbox implements INodeType {
 							customers_origins_id,
 						};
 
-						// Adiciona campos obrigatórios se fornecidos
+						// Add required fields when provided
 						if (additionalFields.users_id) {
 							body.users_id = additionalFields.users_id;
 						}
@@ -2761,7 +2764,7 @@ else if (operation === 'update') {
 
 						const body: Record<string, any> = {};
 
-						// Adicionar apenas os campos que foram fornecidos
+						// Add only the fields that were provided
 						Object.keys(updateFields).forEach(key => {
 							if (updateFields[key as keyof typeof updateFields]) {
 								body[key] = updateFields[key as keyof typeof updateFields];
@@ -2789,17 +2792,17 @@ else if (operation === 'update') {
 
 					if (operation === 'create') {
 						// ----------------------------------
-						//         task:create (VERSÃO COMPLETA)
+						//         task:create (FULL VERSION)
 						// ----------------------------------
 
-						// Extrair parâmetros obrigatórios
+						// Extract required parameters
 						const from = this.getNodeParameter('from', i) as string;
 						const tasks_id = this.getNodeParameter('tasks_id', i) as string;
 						const lawsuits_id = this.getNodeParameter('lawsuits_id', i) as string;
 						const start_date = this.getNodeParameter('start_date', i) as string;
 						const guests = this.getNodeParameter('guests', i) as string;
 
-						// Criar o objeto de dados da tarefa com os campos obrigatórios
+						// Build the task data object with the required fields
 						const taskData: Record<string, any> = {
 							from,
 							tasks_id,
@@ -2808,8 +2811,8 @@ else if (operation === 'update') {
 							guests,
 						};
 
-						// Extrair e adicionar todos os campos opcionais
-						// Campos de texto
+						// Extract and add all optional fields
+						// Text fields
 						const textFields = [
 							'comments',
 							'start_time',
@@ -2819,7 +2822,7 @@ else if (operation === 'update') {
 							'local'
 						];
 
-						// Campos booleanos
+						// Boolean fields
 						const booleanFields = [
 							'urgent',
 							'important',
@@ -2828,7 +2831,7 @@ else if (operation === 'update') {
 
 						const additionalFields = this.getNodeParameter('additionalFields', i, {}) as Record<string, any>;
 
-						// Processar campos de texto do additionalFields
+						// Process text fields from additionalFields
 						for (const field of textFields) {
 							if (additionalFields[field] && typeof additionalFields[field] === 'string') {
 								const value = (additionalFields[field] as string).trim();
@@ -2838,7 +2841,7 @@ else if (operation === 'update') {
 							}
 						}
 
-						// Processar campos booleanos - só adiciona se true
+						// Process boolean fields - only add when true
 						for (const field of booleanFields) {
 							if (field in additionalFields) {
 								let value = additionalFields[field];
@@ -2853,7 +2856,7 @@ else if (operation === 'update') {
 							}
 						}
 
-						// Usar o endpoint correto conforme documentação da API
+						// Use the correct endpoint per API documentation
 						const taskOptions: IHttpRequestOptions = {
 							method: 'POST',
 							url: `${credentials.apiUrl}/posts`,
@@ -2864,8 +2867,8 @@ else if (operation === 'update') {
 							},
 						};
 
-						// Fazer a requisição e retornar diretamente a resposta
-						// Sem formatação adicional para evitar problemas
+						// Send the request and return the response directly
+						// without extra formatting to avoid issues
 						responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',taskOptions);
 					}
 					else if (operation === 'get') {
@@ -2901,9 +2904,9 @@ else if (operation === 'update') {
 						if (additionalFields.status) {
 							qs.status = additionalFields.status;
 						}
-						// Garantir que o token de autenticação esteja presente e no formato correto
+						// Ensure authentication token is present and in the expected format
 						if (!credentials.apiToken) {
-							throw new Error('Token de autenticação não encontrado. Verifique suas credenciais.');
+							throw new NodeOperationError(this.getNode(), 'Authentication token not found. Please verify your credentials.', { itemIndex: i });
 						}
 
 						const historyOptions: IHttpRequestOptions = {
@@ -2923,7 +2926,7 @@ else if (operation === 'update') {
 						//         task:getTasks
 						// ----------------------------------
 
-						// Obter parâmetros adicionais com tratamento de erro mais robusto
+						// Get additional parameters with more robust error handling
 						let additionalFields: {
 							date_start?: string;
 							date_end?: string;
@@ -2950,7 +2953,7 @@ else if (operation === 'update') {
 
 						const qs: Record<string, any> = {};
 
-						// Adiciona date_start e date_end apenas se forem fornecidos e não estiverem vazios
+						// Add date_start and date_end only if provided and non-empty
 						if (additionalFields.date_start && additionalFields.date_start.trim() !== '') {
 							qs.date_start = additionalFields.date_start.trim();
 						}
@@ -2975,7 +2978,7 @@ else if (operation === 'update') {
 							qs.user_name = additionalFields.user_name;
 						}
 
-						// Adiciona created_start e created_end apenas se forem fornecidos e não estiverem vazios
+						// Add created_start and created_end only if provided and non-empty
 						if (additionalFields.created_start && additionalFields.created_start.trim() !== '') {
 							qs.created_start = additionalFields.created_start.trim();
 						}
@@ -2984,7 +2987,7 @@ else if (operation === 'update') {
 							qs.created_end = additionalFields.created_end.trim();
 						}
 
-						// Adiciona deadline_start e deadline_end apenas se forem fornecidos e não estiverem vazios
+						// Add deadline_start and deadline_end only if provided and non-empty
 						if (additionalFields.deadline_start && additionalFields.deadline_start.trim() !== '') {
 							qs.deadline_start = additionalFields.deadline_start.trim();
 						}
@@ -2997,7 +3000,7 @@ else if (operation === 'update') {
 							qs.task_id = additionalFields.task_id;
 						}
 
-						// Adiciona id se fornecido
+						// Add id if provided
 						if (additionalFields.id && additionalFields.id > 0) {
 							qs.id = additionalFields.id;
 						}
@@ -3027,13 +3030,7 @@ else if (operation === 'update') {
 						try {
 							responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'advboxApi',taskOptions);
 						} catch (error) {
-							throw new NodeOperationError(this.getNode(),
-								`Erro na requisição GET /posts: ${error instanceof Error ? error.message : 'Erro desconhecido'}. Verifique os parâmetros e credenciais.`, 
-								{
-									description: 'Verifique se os parâmetros date_start e date_end estão no formato correto (yyyy-mm-dd) e se as credenciais são válidas.',
-									itemIndex: i,
-								}
-							);
+							throw new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
 						}
 					}
 				}
@@ -3051,14 +3048,14 @@ else if (operation === 'update') {
 						const date = this.getNodeParameter('date', i) as string;
 						const description = this.getNodeParameter('description', i) as string;
 
-						// Criar o objeto de dados do movimento com os campos separados
+						// Build the movement data object with the separate fields
 						const movementData = {
 							lawsuit_id,
 							date,
 							description
 						};
 
-						// Usar o endpoint correto conforme documentação da API
+						// Use the correct endpoint per API documentation
 						const movementOptions: IHttpRequestOptions = {
 							method: 'POST',
 							url: `${credentials.apiUrl}/lawsuits/movement`,
@@ -3306,33 +3303,33 @@ else if (operation === 'update') {
 					}
 				}
 
-				// CORREÇÃO PRINCIPAL: Processamento seguro da resposta
-				// Garantir que sempre retornamos um array válido
+				// Safely process the response
+				// Ensure we always return a valid array
 				let processedData: any;
 
-				// Verificar se responseData é válido
+				// Check whether responseData is valid
 				if (responseData === null || responseData === undefined) {
 					processedData = { success: true, message: 'Operation completed successfully' };
 				} else {
 					processedData = responseData;
 				}
 
-				// Sempre converter para array se não for um array
+				// Always convert to array when the value is not already an array
 				const dataArray = Array.isArray(processedData) ? processedData : [processedData];
 
-				// Converter cada item para o formato esperado pelo n8n
+				// Convert each item to the format expected by n8n
 				const formattedData = dataArray.map((item: any) => {
-					// Se o item já está no formato correto, manter
+					// If the item is already in the expected shape, keep it
 					if (item && typeof item === 'object' && item.json) {
 						return item;
 					}
-					// Caso contrário, envolver no formato esperado
+					// Otherwise, wrap it in the expected shape
 					return {
 						json: item || {},
 					};
 				});
 
-				// Construir os dados de execução de forma segura
+				// Build the execution data safely
 				const executionData = this.helpers.constructExecutionMetaData(
 					formattedData,
 					{ itemData: { item: i } }
@@ -3341,13 +3338,13 @@ else if (operation === 'update') {
 				returnData.push(...executionData);
 			} catch (error) {
 				if (this.continueOnFail()) {
-					// Em caso de erro, criar um objeto de erro válido
+					// On error, create a valid error object
 					const currentResource = this.getNodeParameter('resource', i, 'unknown') as string;
 					const currentOperation = this.getNodeParameter('operation', i, 'unknown') as string;
-					
+
 					const errorData = [{
-						json: { 
-							error: error instanceof Error ? error.message : 'Erro desconhecido',
+						json: {
+							error: error instanceof Error ? error.message : 'Unknown error',
 							resource: currentResource,
 							operation: currentOperation,
 							itemIndex: i
@@ -3361,13 +3358,11 @@ else if (operation === 'update') {
 					returnData.push(...executionData);
 					continue;
 				}
-				throw new NodeOperationError(this.getNode(), error instanceof Error ? error : new Error(String(error)), {
-					itemIndex: i,
-				});
+				throw new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
 			}
 		}
 
-		// Garantir que sempre retornamos dados válidos
+		// Ensure we always return valid data
 		if (returnData.length === 0) {
 			returnData.push({
 				json: { success: true, message: 'No data processed' },

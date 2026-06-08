@@ -2,6 +2,10 @@
 	"url": "/settings",
 	"method": "GET",
 	"response": {
-		"output": "{{body.departments}}"
+		"iterate": "{{body.financial.departments}}",
+		"output": {
+			"label": "{{item.sector}}",
+			"value": "{{item.id}}"
+		}
 	}
 }

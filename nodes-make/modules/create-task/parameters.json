@@ -1,13 +1,16 @@
 [
 	{
-		"name": "lawsuits_id",
-		"type": "uinteger",
-		"label": "Lawsuit ID",
+		"name": "from",
+		"type": "select",
+		"label": "From (Creator)",
 		"required": true,
-		"help": "ID of the lawsuit to associate the task with."
+		"options": {
+			"store": "rpc://loadUsers"
+		},
+		"help": "User who is creating the task."
 	},
 	{
-		"name": "task_types_id",
+		"name": "tasks_id",
 		"type": "select",
 		"label": "Task Type",
 		"required": true,
@@ -17,11 +20,25 @@
 		"help": "Type of the task."
 	},
 	{
-		"name": "title",
-		"type": "text",
-		"label": "Title",
+		"name": "lawsuits_id",
+		"type": "uinteger",
+		"label": "Lawsuit ID",
 		"required": true,
-		"help": "Title of the task."
+		"help": "ID of the lawsuit to associate the task with."
+	},
+	{
+		"name": "start_date",
+		"type": "date",
+		"label": "Start Date",
+		"required": true,
+		"help": "Start date of the task (YYYY-MM-DD)."
+	},
+	{
+		"name": "guests",
+		"type": "text",
+		"label": "Guests (User IDs)",
+		"required": true,
+		"help": "Comma-separated user IDs assigned to this task."
 	},
 	{
 		"name": "additionalFields",
@@ -29,27 +46,51 @@
 		"label": "Additional Fields",
 		"spec": [
 			{
-				"name": "users_id",
-				"type": "select",
-				"label": "Responsible User",
-				"options": {
-					"store": "rpc://loadUsers"
-				}
-			},
-			{
-				"name": "description",
+				"name": "comments",
 				"type": "text",
-				"label": "Description"
+				"label": "Comments"
 			},
 			{
-				"name": "date_start",
-				"type": "date",
-				"label": "Start Date"
+				"name": "start_time",
+				"type": "text",
+				"label": "Start Time",
+				"help": "Start time (HH:MM)."
 			},
 			{
-				"name": "date_end",
+				"name": "end_date",
 				"type": "date",
 				"label": "End Date"
+			},
+			{
+				"name": "end_time",
+				"type": "text",
+				"label": "End Time",
+				"help": "End time (HH:MM)."
+			},
+			{
+				"name": "date_deadline",
+				"type": "date",
+				"label": "Deadline"
+			},
+			{
+				"name": "local",
+				"type": "text",
+				"label": "Location"
+			},
+			{
+				"name": "urgent",
+				"type": "boolean",
+				"label": "Urgent"
+			},
+			{
+				"name": "important",
+				"type": "boolean",
+				"label": "Important"
+			},
+			{
+				"name": "display_schedule",
+				"type": "boolean",
+				"label": "Display in Schedule"
 			}
 		]
 	}

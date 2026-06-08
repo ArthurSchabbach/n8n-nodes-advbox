@@ -18,6 +18,54 @@
 		"help": "Filter by CPF or CNPJ."
 	},
 	{
+		"name": "document",
+		"type": "text",
+		"label": "Document",
+		"help": "Filter by document number."
+	},
+	{
+		"name": "phone",
+		"type": "text",
+		"label": "Phone",
+		"help": "Filter by phone number."
+	},
+	{
+		"name": "city",
+		"type": "text",
+		"label": "City",
+		"help": "Filter by city."
+	},
+	{
+		"name": "state",
+		"type": "text",
+		"label": "State",
+		"help": "Filter by state."
+	},
+	{
+		"name": "occupation",
+		"type": "text",
+		"label": "Occupation",
+		"help": "Filter by occupation."
+	},
+	{
+		"name": "birthdays",
+		"type": "boolean",
+		"label": "Birthdays This Month",
+		"help": "Filter customers with birthdays in the current month."
+	},
+	{
+		"name": "created_start",
+		"type": "date",
+		"label": "Created Start",
+		"help": "Filter by creation start date (YYYY-MM-DD)."
+	},
+	{
+		"name": "created_end",
+		"type": "date",
+		"label": "Created End",
+		"help": "Filter by creation end date (YYYY-MM-DD)."
+	},
+	{
 		"name": "limit",
 		"type": "uinteger",
 		"label": "Limit",

@@ -12,14 +12,6 @@
 		"label": "Fields to Update",
 		"spec": [
 			{
-				"name": "stages_id",
-				"type": "select",
-				"label": "Stage",
-				"options": {
-					"store": "rpc://loadStages"
-				}
-			},
-			{
 				"name": "users_id",
 				"type": "select",
 				"label": "Responsible User",
@@ -28,9 +20,20 @@
 				}
 			},
 			{
-				"name": "title",
-				"type": "text",
-				"label": "Title"
+				"name": "stages_id",
+				"type": "select",
+				"label": "Stage",
+				"options": {
+					"store": "rpc://loadStages"
+				}
+			},
+			{
+				"name": "type_lawsuits_id",
+				"type": "select",
+				"label": "Lawsuit Type",
+				"options": {
+					"store": "rpc://loadLawsuitTypes"
+				}
 			},
 			{
 				"name": "process_number",
@@ -38,9 +41,24 @@
 				"label": "Process Number"
 			},
 			{
-				"name": "description",
+				"name": "protocol_number",
 				"type": "text",
-				"label": "Description"
+				"label": "Protocol Number"
+			},
+			{
+				"name": "folder",
+				"type": "text",
+				"label": "Folder"
+			},
+			{
+				"name": "date",
+				"type": "date",
+				"label": "Date"
+			},
+			{
+				"name": "notes",
+				"type": "text",
+				"label": "Notes"
 			}
 		]
 	}

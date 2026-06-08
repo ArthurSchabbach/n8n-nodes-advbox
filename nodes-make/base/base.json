@@ -3,8 +3,7 @@
 	"headers": {
 		"Authorization": "Bearer {{connection.apiToken}}",
 		"Accept": "application/json",
-		"Content-Type": "application/json",
-		"{{...}}": "{{ifempty(connection.xAgent, omit, createObject('x-agent', connection.xAgent))}}"
+		"Content-Type": "application/json"
 	},
 	"log": {
 		"sanitize": ["request.headers.authorization"]

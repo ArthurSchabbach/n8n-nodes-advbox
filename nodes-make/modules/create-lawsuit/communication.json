@@ -2,9 +2,10 @@
 	"url": "/lawsuits",
 	"method": "POST",
 	"body": {
+		"users_id": "{{parameters.users_id}}",
 		"customers_id": "{{parameters.customers_id}}",
-		"lawsuits_types_id": "{{parameters.lawsuits_types_id}}",
 		"stages_id": "{{parameters.stages_id}}",
+		"type_lawsuits_id": "{{parameters.type_lawsuits_id}}",
 		"{{...}}": "{{parameters.additionalFields}}"
 	},
 	"response": {

@@ -2,6 +2,10 @@
 	"url": "/settings",
 	"method": "GET",
 	"response": {
-		"output": "{{body.banks}}"
+		"iterate": "{{body.financial.banks}}",
+		"output": {
+			"label": "{{item.name}}",
+			"value": "{{item.id}}"
+		}
 	}
 }

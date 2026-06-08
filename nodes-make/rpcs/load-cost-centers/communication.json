@@ -2,6 +2,10 @@
 	"url": "/settings",
 	"method": "GET",
 	"response": {
-		"output": "{{body.cost_centers}}"
+		"iterate": "{{body.financial.cost_centers}}",
+		"output": {
+			"label": "{{item.cost_center}}",
+			"value": "{{item.id}}"
+		}
 	}
 }

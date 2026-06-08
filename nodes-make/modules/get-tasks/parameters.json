@@ -3,18 +3,52 @@
 		"name": "date_start",
 		"type": "date",
 		"label": "Start Date",
-		"required": true,
 		"help": "Filter tasks from this date (YYYY-MM-DD)."
 	},
 	{
 		"name": "date_end",
 		"type": "date",
 		"label": "End Date",
-		"required": true,
 		"help": "Filter tasks until this date (YYYY-MM-DD)."
 	},
 	{
-		"name": "users_id",
+		"name": "created_start",
+		"type": "date",
+		"label": "Created Start",
+		"help": "Filter by creation start date (YYYY-MM-DD)."
+	},
+	{
+		"name": "created_end",
+		"type": "date",
+		"label": "Created End",
+		"help": "Filter by creation end date (YYYY-MM-DD)."
+	},
+	{
+		"name": "deadline_start",
+		"type": "date",
+		"label": "Deadline Start",
+		"help": "Filter by deadline start date (YYYY-MM-DD)."
+	},
+	{
+		"name": "deadline_end",
+		"type": "date",
+		"label": "Deadline End",
+		"help": "Filter by deadline end date (YYYY-MM-DD)."
+	},
+	{
+		"name": "completed_start",
+		"type": "date",
+		"label": "Completed Start",
+		"help": "Filter by completion start date (YYYY-MM-DD)."
+	},
+	{
+		"name": "completed_end",
+		"type": "date",
+		"label": "Completed End",
+		"help": "Filter by completion end date (YYYY-MM-DD)."
+	},
+	{
+		"name": "user_id",
 		"type": "select",
 		"label": "Responsible User",
 		"options": {
@@ -23,15 +57,41 @@
 		"help": "Filter by responsible user."
 	},
 	{
+		"name": "user_name",
+		"type": "text",
+		"label": "User Name",
+		"help": "Filter by user name."
+	},
+	{
+		"name": "task_id",
+		"type": "text",
+		"label": "Task Type ID",
+		"help": "Filter by task type ID."
+	},
+	{
+		"name": "id",
+		"type": "uinteger",
+		"label": "Task ID",
+		"help": "Filter by specific task ID."
+	},
+	{
+		"name": "lawsuit_id",
+		"type": "uinteger",
+		"label": "Lawsuit ID",
+		"help": "Filter by lawsuit ID."
+	},
+	{
 		"name": "limit",
 		"type": "uinteger",
 		"label": "Limit",
-		"default": 10
+		"default": 10,
+		"help": "Number of results (1-1000)."
 	},
 	{
 		"name": "offset",
 		"type": "uinteger",
 		"label": "Offset",
-		"default": 0
+		"default": 0,
+		"help": "Pagination offset."
 	}
 ]

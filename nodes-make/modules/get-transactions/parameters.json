@@ -18,6 +18,12 @@
 		"help": "Filter by responsible person name or ID."
 	},
 	{
+		"name": "debit_bank",
+		"type": "text",
+		"label": "Bank Account",
+		"help": "Filter by bank account."
+	},
+	{
 		"name": "lawsuit_id",
 		"type": "uinteger",
 		"label": "Lawsuit ID",
@@ -42,6 +48,12 @@
 		"help": "Filter by description."
 	},
 	{
+		"name": "protocol_number",
+		"type": "text",
+		"label": "Protocol Number",
+		"help": "Filter by protocol number."
+	},
+	{
 		"name": "cost_center",
 		"type": "text",
 		"label": "Cost Center",
@@ -58,6 +70,18 @@
 		"type": "date",
 		"label": "Competence End",
 		"help": "End date for competence filter (YYYY-MM-DD)."
+	},
+	{
+		"name": "created_start",
+		"type": "date",
+		"label": "Created Start",
+		"help": "Start date for creation date filter (YYYY-MM-DD)."
+	},
+	{
+		"name": "created_end",
+		"type": "date",
+		"label": "Created End",
+		"help": "End date for creation date filter (YYYY-MM-DD)."
 	},
 	{
 		"name": "date_due_start",

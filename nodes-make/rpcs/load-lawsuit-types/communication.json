@@ -2,6 +2,10 @@
 	"url": "/settings",
 	"method": "GET",
 	"response": {
-		"output": "{{body.lawsuit_types}}"
+		"iterate": "{{body.lawsuit_types}}",
+		"output": {
+			"label": "{{item.type}} ({{item.group}})",
+			"value": "{{item.id}}"
+		}
 	}
 }

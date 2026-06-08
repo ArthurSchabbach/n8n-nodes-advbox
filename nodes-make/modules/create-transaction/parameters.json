@@ -5,10 +5,10 @@
 		"label": "Entry Type",
 		"required": true,
 		"options": [
-			{ "label": "Income (Crédito)", "value": "income" },
-			{ "label": "Expense (Débito)", "value": "expense" }
+			{ "label": "Income (Cr\u00e9dito)", "value": "income" },
+			{ "label": "Expense (D\u00e9bito)", "value": "expense" }
 		],
-		"help": "Transaction type: income (CRÉDITO) or expense (DÉBITO)."
+		"help": "Transaction type: income (CR\u00c9DITO) or expense (D\u00c9BITO)."
 	},
 	{
 		"name": "users_id",
@@ -38,7 +38,7 @@
 		"options": {
 			"store": "rpc://loadCategories"
 		},
-		"help": "Financial category. Must match entry_type (income→CRÉDITO, expense→DÉBITO)."
+		"help": "Financial category. Must match entry_type (income\u2192CR\u00c9DITO, expense\u2192D\u00c9BITO)."
 	},
 	{
 		"name": "cost_centers_id",

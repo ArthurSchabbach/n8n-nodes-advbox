@@ -1,16 +1,17 @@
 {
-	"url": "/settings",
+	"url": "https://app.advbox.com.br/api/v1/settings",
 	"method": "GET",
 	"headers": {
 		"Authorization": "Bearer {{parameters.apiToken}}",
 		"Accept": "application/json"
 	},
 	"response": {
-		"valid": {
-			"condition": "{{statusCode}} === 200"
-		},
+		"valid": "{{statusCode === 200}}",
 		"error": {
-			"message": "Invalid API Token. Please check your credentials."
+			"message": "[{{statusCode}}] {{body.message}}"
 		}
+	},
+	"log": {
+		"sanitize": ["request.headers.authorization"]
 	}
 }

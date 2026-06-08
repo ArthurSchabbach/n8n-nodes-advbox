@@ -2,6 +2,10 @@
 	"url": "/settings",
 	"method": "GET",
 	"response": {
-		"output": "{{body.stages}}"
+		"iterate": "{{body.stages}}",
+		"output": {
+			"label": "{{item.stage}} ({{item.step}})",
+			"value": "{{item.id}}"
+		}
 	}
 }

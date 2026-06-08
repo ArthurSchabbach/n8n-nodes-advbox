@@ -2,9 +2,9 @@
 	"url": "/lawsuits/movement",
 	"method": "POST",
 	"body": {
-		"lawsuits_id": "{{parameters.lawsuits_id}}",
-		"description": "{{parameters.description}}",
-		"{{...}}": "{{parameters.additionalFields}}"
+		"lawsuit_id": "{{parameters.lawsuit_id}}",
+		"date": "{{parameters.date}}",
+		"description": "{{parameters.description}}"
 	},
 	"response": {
 		"output": "{{body}}"

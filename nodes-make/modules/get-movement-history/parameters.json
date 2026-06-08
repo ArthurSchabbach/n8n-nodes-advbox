@@ -7,15 +7,23 @@
 		"help": "ID of the lawsuit to get movement history for."
 	},
 	{
+		"name": "origin",
+		"type": "text",
+		"label": "Origin",
+		"help": "Filter by movement origin."
+	},
+	{
 		"name": "limit",
 		"type": "uinteger",
 		"label": "Limit",
-		"default": 10
+		"default": 10,
+		"help": "Number of results (1-1000)."
 	},
 	{
 		"name": "offset",
 		"type": "uinteger",
 		"label": "Offset",
-		"default": 0
+		"default": 0,
+		"help": "Pagination offset."
 	}
 ]

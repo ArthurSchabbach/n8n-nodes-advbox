@@ -2,9 +2,11 @@
 	"url": "/posts",
 	"method": "POST",
 	"body": {
+		"from": "{{parameters.from}}",
+		"tasks_id": "{{parameters.tasks_id}}",
 		"lawsuits_id": "{{parameters.lawsuits_id}}",
-		"task_types_id": "{{parameters.task_types_id}}",
-		"title": "{{parameters.title}}",
+		"start_date": "{{parameters.start_date}}",
+		"guests": "{{parameters.guests}}",
 		"{{...}}": "{{parameters.additionalFields}}"
 	},
 	"response": {

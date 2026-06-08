@@ -2,6 +2,7 @@
 	"url": "/movements/{{parameters.lawsuitId}}",
 	"method": "GET",
 	"qs": {
+		"origin": "{{parameters.origin}}",
 		"limit": "{{parameters.limit}}",
 		"offset": "{{parameters.offset}}"
 	},

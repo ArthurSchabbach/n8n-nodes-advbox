@@ -10,7 +10,7 @@ const API_BASE_URL = 'https://app.advbox.com.br/api/v1';
 export class AdvboxApi implements ICredentialType {
 	name = 'advboxApi';
 	displayName = 'ADVBOX API';
-	documentationUrl = '';
+	documentationUrl = 'https://app.advbox.com.br/api/documentation';
 	properties: INodeProperties[] = [
 		{
 			displayName: 'API Token',

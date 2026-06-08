@@ -1,20 +1,20 @@
 [
 	{
-		"name": "customers_id",
-		"type": "uinteger",
-		"label": "Customer ID",
-		"required": true,
-		"help": "ID of the customer associated with this lawsuit."
-	},
-	{
-		"name": "lawsuits_types_id",
+		"name": "users_id",
 		"type": "select",
-		"label": "Lawsuit Type",
+		"label": "Responsible User",
 		"required": true,
 		"options": {
-			"store": "rpc://loadLawsuitTypes"
+			"store": "rpc://loadUsers"
 		},
-		"help": "Type of the lawsuit."
+		"help": "Responsible user for the lawsuit."
+	},
+	{
+		"name": "customers_id",
+		"type": "text",
+		"label": "Customer IDs",
+		"required": true,
+		"help": "Customer ID(s). Comma-separated for multiple (e.g. 1,2,3)."
 	},
 	{
 		"name": "stages_id",
@@ -27,32 +27,44 @@
 		"help": "Initial stage of the lawsuit."
 	},
 	{
+		"name": "type_lawsuits_id",
+		"type": "select",
+		"label": "Lawsuit Type",
+		"required": true,
+		"options": {
+			"store": "rpc://loadLawsuitTypes"
+		},
+		"help": "Type of the lawsuit."
+	},
+	{
 		"name": "additionalFields",
 		"type": "collection",
 		"label": "Additional Fields",
 		"spec": [
-			{
-				"name": "users_id",
-				"type": "select",
-				"label": "Responsible User",
-				"options": {
-					"store": "rpc://loadUsers"
-				}
-			},
-			{
-				"name": "title",
-				"type": "text",
-				"label": "Title"
-			},
 			{
 				"name": "process_number",
 				"type": "text",
 				"label": "Process Number"
 			},
 			{
-				"name": "description",
+				"name": "protocol_number",
 				"type": "text",
-				"label": "Description"
+				"label": "Protocol Number"
+			},
+			{
+				"name": "folder",
+				"type": "text",
+				"label": "Folder"
+			},
+			{
+				"name": "date",
+				"type": "date",
+				"label": "Date"
+			},
+			{
+				"name": "notes",
+				"type": "text",
+				"label": "Notes"
 			},
 			{
 				"name": "lawsuit_groups_id",

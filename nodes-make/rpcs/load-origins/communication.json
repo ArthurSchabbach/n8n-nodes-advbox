@@ -2,9 +2,9 @@
 	"url": "/settings",
 	"method": "GET",
 	"response": {
-		"iterate": "{{body.financial.categories}}",
+		"iterate": "{{body.origins}}",
 		"output": {
-			"label": "{{item.category}} ({{item.type}})",
+			"label": "{{item.origin}}",
 			"value": "{{item.id}}"
 		}
 	}

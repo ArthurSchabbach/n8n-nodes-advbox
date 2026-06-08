@@ -16,8 +16,8 @@
 				"type": "select",
 				"label": "Entry Type",
 				"options": [
-					{ "label": "Income (Crédito)", "value": "income" },
-					{ "label": "Expense (Débito)", "value": "expense" }
+					{ "label": "Income (Cr\u00e9dito)", "value": "income" },
+					{ "label": "Expense (D\u00e9bito)", "value": "expense" }
 				],
 				"help": "Required when changing categories_id."
 			},

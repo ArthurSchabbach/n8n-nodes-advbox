@@ -2,6 +2,10 @@
 	"url": "/settings",
 	"method": "GET",
 	"response": {
-		"output": "{{body.task_types}}"
+		"iterate": "{{body.tasks}}",
+		"output": {
+			"label": "{{item.task}}",
+			"value": "{{item.id}}"
+		}
 	}
 }

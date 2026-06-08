@@ -1,6 +1,57 @@
 [
 	{
-		"name": "stages_id",
+		"name": "name",
+		"type": "text",
+		"label": "Name",
+		"help": "Filter by lawsuit name."
+	},
+	{
+		"name": "process_number",
+		"type": "text",
+		"label": "Process Number",
+		"help": "Filter by process number."
+	},
+	{
+		"name": "protocol_number",
+		"type": "text",
+		"label": "Protocol Number",
+		"help": "Filter by protocol number."
+	},
+	{
+		"name": "customer_id",
+		"type": "uinteger",
+		"label": "Customer ID",
+		"help": "Filter by customer ID."
+	},
+	{
+		"name": "group",
+		"type": "select",
+		"label": "Group",
+		"options": {
+			"store": "rpc://loadLawsuitGroups"
+		},
+		"help": "Filter by lawsuit group."
+	},
+	{
+		"name": "type",
+		"type": "select",
+		"label": "Type",
+		"options": {
+			"store": "rpc://loadLawsuitTypes"
+		},
+		"help": "Filter by lawsuit type."
+	},
+	{
+		"name": "responsible",
+		"type": "select",
+		"label": "Responsible User",
+		"options": {
+			"store": "rpc://loadUsers"
+		},
+		"help": "Filter by responsible user."
+	},
+	{
+		"name": "stage",
 		"type": "select",
 		"label": "Stage",
 		"options": {
@@ -9,13 +60,10 @@
 		"help": "Filter by stage."
 	},
 	{
-		"name": "users_id",
-		"type": "select",
-		"label": "Responsible User",
-		"options": {
-			"store": "rpc://loadUsers"
-		},
-		"help": "Filter by responsible user."
+		"name": "step",
+		"type": "text",
+		"label": "Step",
+		"help": "Filter by step."
 	},
 	{
 		"name": "limit",
