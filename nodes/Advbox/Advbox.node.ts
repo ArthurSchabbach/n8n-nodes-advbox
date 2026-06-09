@@ -318,7 +318,7 @@ export class Advbox implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Consume Advbox API',
+		description: 'Consume Advbox API.',
 		defaults: {
 			name: 'Advbox',
 		},
@@ -381,25 +381,25 @@ export class Advbox implements INodeType {
 					{
 						name: 'Create',
 						value: 'create',
-						description: 'Create a new customer',
+						description: 'Create a new customer.',
 						action: 'Create a new customer',
 					},
 					{
 						name: 'Get by id',
 						value: 'get',
-						description: 'Get customer by ID',
+						description: 'Get customer by ID.',
 						action: 'Get customer by ID',
 					},
 					{
 						name: 'Get many',
 						value: 'getAll',
-						description: 'Get many customers',
+						description: 'Get many customers.',
 						action: 'Get many customers',
 					},
 					{
 						name: 'Get birthdays',
 						value: 'getBirthdays',
-						description: 'Get customers with birthdays in current month',
+						description: 'Get customers with birthdays in current month.',
 						action: 'Get customers with birthdays',
 					},
 				],
@@ -421,31 +421,31 @@ export class Advbox implements INodeType {
 					{
 						name: 'Create',
 						value: 'create',
-						description: 'Create a new lawsuit',
+						description: 'Create a new lawsuit.',
 						action: 'Create a new lawsuit',
 					},
 					{
 						name: 'Get by id',
 						value: 'get',
-						description: 'Get lawsuit by ID',
+						description: 'Get lawsuit by ID.',
 						action: 'Get lawsuit by ID',
 					},
 					{
 						name: 'Get many',
 						value: 'getAll',
-						description: 'Get many lawsuits',
+						description: 'Get many lawsuits.',
 						action: 'Get many lawsuits',
 					},
 					{
 						name: 'Get lawsuit task history',
 						value: 'getTaskHistory',
-						description: 'Get task history for a lawsuit',
+						description: 'Get task history for a lawsuit.',
 						action: 'Get lawsuit task history',
 					},
 					{
 						name: 'Update',
 						value: 'update',
-						description: 'Update an existing lawsuit',
+						description: 'Update an existing lawsuit.',
 						action: 'Update an existing lawsuit',
 					},
 
@@ -468,13 +468,13 @@ export class Advbox implements INodeType {
 					{
 						name: 'Create',
 						value: 'create',
-						description: 'Create a new task',
+						description: 'Create a new task.',
 						action: 'Create a new task',
 					},
 					{
 						name: 'Get Tasks',
 						value: 'getTasks',
-						description: 'Retrieve a list of tasks based on filters',
+						description: 'Retrieve a list of tasks based on filters.',
 						action: 'Get tasks',
 					},
 
@@ -497,13 +497,13 @@ export class Advbox implements INodeType {
 					{
 						name: 'Create',
 						value: 'create',
-						description: 'Create a new manual movement',
+						description: 'Create a new manual movement.',
 						action: 'Create a new manual movement',
 					},
 					{
 						name: 'Get history',
 						value: 'getHistory',
-						description: 'Get movement history for a lawsuit',
+						description: 'Get movement history for a lawsuit.',
 						action: 'Movement history',
 					},
 				],
@@ -525,7 +525,7 @@ export class Advbox implements INodeType {
 					{
 						name: 'Get',
 						value: 'get',
-						description: 'Get account settings',
+						description: 'Get account settings.',
 						action: 'Get account settings',
 					},
 				],
@@ -547,19 +547,19 @@ export class Advbox implements INodeType {
 					{
 						name: 'Create',
 						value: 'create',
-						description: 'Create a new financial transaction',
+						description: 'Create a new financial transaction.',
 						action: 'Create a transaction',
 					},
 					{
 						name: 'Get All',
 						value: 'getAll',
-						description: 'Retrieve financial transactions with comprehensive filter options',
+						description: 'Retrieve financial transactions with comprehensive filter options.',
 						action: 'Get all transactions',
 					},
 					{
 						name: 'Update',
 						value: 'update',
-						description: 'Update an existing financial transaction',
+						description: 'Update an existing financial transaction.',
 						action: 'Update a transaction',
 					},
 				],
@@ -571,7 +571,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'Name of the customer',
+				description: 'Name of the customer.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -595,84 +595,84 @@ export class Advbox implements INodeType {
 						name: 'users_id',
 						type: 'number',
 						default: '',
-						description: 'ID of the user creating the customer',
+						description: 'ID of the user creating the customer.',
 					},
 					{
 						displayName: 'Email',
 						name: 'email',
 						type: 'string',
 						default: '',
-						description: 'Customer email address',
+						description: 'Customer email address.',
 					},
 					{
 						displayName: 'Identification (CPF/CNPJ)',
 						name: 'identification',
 						type: 'string',
 						default: '',
-						description: 'Customer identification number (CPF/CNPJ)',
+						description: 'Customer identification number (CPF/CNPJ).',
 					},
 					{
 						displayName: 'Document (Registration Number)',
 						name: 'document',
 						type: 'string',
 						default: '',
-						description: 'Customer registration document number',
+						description: 'Customer registration document number.',
 					},
 					{
 						displayName: 'Phone',
 						name: 'phone',
 						type: 'string',
 						default: '',
-						description: 'Customer phone number (format: 99999999999 or (99) 99999-9999)',
+						description: 'Customer phone number (format: 99999999999 or (99) 99999-9999).',
 					},
 					{
 						displayName: 'Cellphone',
 						name: 'cellphone',
 						type: 'string',
 						default: '',
-						description: 'Customer cellphone number (format: 99999999999 or (99) 99999-9999)',
+						description: 'Customer cellphone number (format: 99999999999 or (99) 99999-9999).',
 					},
 					{
 						displayName: 'Birthdate',
 						name: 'birthdate',
 						type: 'string',
 						default: '',
-						description: 'Customer birthdate (format: YYYY-MM-DD)',
+						description: 'Customer birthdate (format: YYYY-MM-DD).',
 					},
 					{
 						displayName: 'Occupation',
 						name: 'occupation',
 						type: 'string',
 						default: '',
-						description: 'Customer occupation or profession',
+						description: 'Customer occupation or profession.',
 					},
 					{
 						displayName: 'Postal Code',
 						name: 'postalcode',
 						type: 'string',
 						default: '',
-						description: 'Customer postal code (format: 99999-999)',
+						description: 'Customer postal code (format: 99999-999).',
 					},
 					{
 						displayName: 'City',
 						name: 'city',
 						type: 'string',
 						default: '',
-						description: 'Customer city',
+						description: 'Customer city.',
 					},
 					{
 						displayName: 'State',
 						name: 'state',
 						type: 'string',
 						default: '',
-						description: 'Customer state',
+						description: 'Customer state.',
 					},
 					{
 						displayName: 'Notes',
 						name: 'notes',
 						type: 'string',
 						default: '',
-						description: 'Additional notes about the customer',
+						description: 'Additional notes about the customer.',
 					},
 				],
 				displayOptions: {
@@ -695,7 +695,7 @@ export class Advbox implements INodeType {
 				},
 				required: true,
 				default: '',
-				description: 'ID of the user responsible for the customer',
+				description: 'ID of the user responsible for the customer.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -716,7 +716,7 @@ export class Advbox implements INodeType {
 				},
 				required: true,
 				default: '',
-				description: 'Origin of the customer',
+				description: 'Origin of the customer.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -734,7 +734,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'ID of the customer',
+				description: 'ID of the customer.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -752,7 +752,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'ID of the lawsuit',
+				description: 'ID of the lawsuit.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -962,7 +962,7 @@ export class Advbox implements INodeType {
 							loadOptionsMethod: 'loadLawsuitGroups',
 						},
 						default: '',
-						description: 'Filter lawsuits by group',
+						description: 'Filter lawsuits by group.',
 					},
 					{
 						displayName: 'Type',
@@ -972,7 +972,7 @@ export class Advbox implements INodeType {
 							loadOptionsMethod: 'loadLawsuitTypes',
 						},
 						default: '',
-						description: 'Filter lawsuits by type',
+						description: 'Filter lawsuits by type.',
 					},
 					{
 						displayName: 'Responsible',
@@ -992,7 +992,7 @@ export class Advbox implements INodeType {
 							loadOptionsMethod: 'loadStages',
 						},
 						default: '',
-						description: 'Filter lawsuits by stage',
+						description: 'Filter lawsuits by stage.',
 					},
 					{
 						displayName: 'Step',
@@ -1037,7 +1037,7 @@ export class Advbox implements INodeType {
 							},
 						],
 						default: '',
-						description: 'Filter lawsuits by step',
+						description: 'Filter lawsuits by step.',
 					},
 					{
 						displayName: 'Limit',
@@ -1079,14 +1079,14 @@ export class Advbox implements INodeType {
 						name: 'date_start',
 						type: 'string',
 						default: '',
-						description: 'Start date for appointment date filter (format: yyyy-mm-dd)',
+						description: 'Start date for appointment date filter (format: yyyy-mm-dd).',
 					},
 					{
 						displayName: 'Date End',
 						name: 'date_end',
 						type: 'string',
 						default: '',
-						description: 'End date for appointment date filter (format: yyyy-mm-dd)',
+						description: 'End date for appointment date filter (format: yyyy-mm-dd).',
 					},
 					{
 						displayName: 'Created Start',
@@ -1138,14 +1138,14 @@ export class Advbox implements INodeType {
 							loadOptionsMethod: 'loadUsers',
 						},
 						default: '',
-						description: 'Select a user to filter tasks',
+						description: 'Select a user to filter tasks.',
 					},
 					{
 						displayName: 'User Name',
 						name: 'user_name',
 						type: 'string',
 						default: '',
-						description: 'Filter by user name',
+						description: 'Filter by user name.',
 					},
 					{
 						displayName: 'Task Type',
@@ -1155,21 +1155,21 @@ export class Advbox implements INodeType {
 							loadOptionsMethod: 'loadTaskTypes',
 						},
 						default: '',
-						description: 'Select a task type to filter tasks',
+						description: 'Select a task type to filter tasks.',
 					},
 					{
 						displayName: 'ID',
 						name: 'id',
 						type: 'number',
 						default: '',
-						description: 'Filter by the ID of a specific assigned task',
+						description: 'Filter by the ID of a specific assigned task.',
 					},
 					{
 						displayName: 'Lawsuit ID',
 						name: 'lawsuit_id',
 						type: 'string',
 						default: '',
-						description: 'Filter by lawsuit ID',
+						description: 'Filter by lawsuit ID.',
 					},
 					{
 						displayName: 'Limit',
@@ -1180,7 +1180,7 @@ export class Advbox implements INodeType {
 							maxValue: 100,
 						},
 						default: 50,
-						description: 'Number of items in the response, between 1 and 100',
+						description: 'Number of items in the response, between 1 and 100.',
 					},
 					{
 						displayName: 'Offset',
@@ -1190,7 +1190,7 @@ export class Advbox implements INodeType {
 							minValue: 0,
 						},
 						default: 0,
-						description: 'Number of items to skip before starting the response (pagination)',
+						description: 'Number of items to skip before starting the response (pagination).',
 					},
 				],
 			},
@@ -1204,7 +1204,7 @@ export class Advbox implements INodeType {
 				},
 				required: true,
 				default: '',
-				description: 'ID of the user responsible for the lawsuit',
+				description: 'ID of the user responsible for the lawsuit.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1222,7 +1222,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'IDs of the customers associated with this lawsuit (array of integers)',
+				description: 'IDs of the customers associated with this lawsuit (array of integers).',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1240,7 +1240,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'ID of the stage for this lawsuit',
+				description: 'ID of the stage for this lawsuit.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1258,7 +1258,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'ID of the lawsuit type',
+				description: 'ID of the lawsuit type.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1293,56 +1293,56 @@ export class Advbox implements INodeType {
 						name: 'users_id',
 						type: 'string',
 						default: '',
-						description: 'User ID',
+						description: 'User ID.',
 					},
 					{
 						displayName: 'Stage ID',
 						name: 'stages_id',
 						type: 'string',
 						default: '',
-						description: 'Stage ID',
+						description: 'Stage ID.',
 					},
 					{
 						displayName: 'Lawsuit Type ID',
 						name: 'type_lawsuits_id',
 						type: 'string',
 						default: '',
-						description: 'Lawsuit type ID',
+						description: 'Lawsuit type ID.',
 					},
 					{
 						displayName: 'Process Number',
 						name: 'process_number',
 						type: 'string',
 						default: '',
-						description: 'Process number',
+						description: 'Process number.',
 					},
 					{
 						displayName: 'Protocol Number',
 						name: 'protocol_number',
 						type: 'string',
 						default: '',
-						description: 'Protocol number',
+						description: 'Protocol number.',
 					},
 					{
 						displayName: 'Folder',
 						name: 'folder',
 						type: 'string',
 						default: '',
-						description: 'Folder',
+						description: 'Folder.',
 					},
 					{
 						displayName: 'Date',
 						name: 'date',
 						type: 'string',
 						default: '',
-						description: 'Date (format: DD/MM/YYYY)',
+						description: 'Date (format: DD/MM/YYYY).',
 					},
 					{
 						displayName: 'Notes',
 						name: 'notes',
 						type: 'string',
 						default: '',
-						description: 'Notes',
+						description: 'Notes.',
 					},
 				],
 			},
@@ -1358,35 +1358,35 @@ export class Advbox implements INodeType {
 						name: 'process_number',
 						type: 'string',
 						default: '',
-						description: 'Process number of the lawsuit',
+						description: 'Process number of the lawsuit.',
 					},
 					{
 						displayName: 'Protocol Number',
 						name: 'protocol_number',
 						type: 'string',
 						default: '',
-						description: 'Protocol number of the lawsuit',
+						description: 'Protocol number of the lawsuit.',
 					},
 					{
 						displayName: 'Folder',
 						name: 'folder',
 						type: 'string',
 						default: '',
-						description: 'Folder for the lawsuit',
+						description: 'Folder for the lawsuit.',
 					},
 					{
 						displayName: 'Date',
 						name: 'date',
 						type: 'string',
 						default: '',
-						description: 'Date (format: DD/MM/YYYY)',
+						description: 'Date (format: DD/MM/YYYY).',
 					},
 					{
 						displayName: 'Notes',
 						name: 'notes',
 						type: 'string',
 						default: '',
-						description: 'Notes for the lawsuit',
+						description: 'Notes for the lawsuit.',
 					},
 				],
 				displayOptions: {
@@ -1410,7 +1410,7 @@ export class Advbox implements INodeType {
 				},
 				required: true,
 				default: '',
-				description: 'ID of the user creating the task',
+				description: 'ID of the user creating the task.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1432,7 +1432,7 @@ export class Advbox implements INodeType {
 				},
 				required: true,
 				default: [],
-				description: 'Select users to invite as guests or enter an expression for an array of user IDs',
+				description: 'Select users to invite as guests or enter an expression for an array of user IDs.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1453,7 +1453,7 @@ export class Advbox implements INodeType {
 				},
 				required: true,
 				default: '',
-				description: 'Type of the task to create',
+				description: 'Type of the task to create.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1471,7 +1471,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'ID of the lawsuit associated with this task',
+				description: 'ID of the lawsuit associated with this task.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1490,7 +1490,7 @@ export class Advbox implements INodeType {
 				required: true,
 				default: '',
 				placeholder: 'DD/MM/YYYY',
-				description: 'Start date of the task in DD/MM/YYYY format',
+				description: 'Start date of the task in DD/MM/YYYY format.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1524,7 +1524,7 @@ export class Advbox implements INodeType {
 						name: 'comments',
 						type: 'string',
 						default: '',
-						description: 'Comments about the task',
+						description: 'Comments about the task.',
 					},
 					{
 						displayName: 'Start Time',
@@ -1532,7 +1532,7 @@ export class Advbox implements INodeType {
 						type: 'string',
 						default: '',
 						placeholder: 'HH:MM',
-						description: 'Start time of the task in HH:MM format',
+						description: 'Start time of the task in HH:MM format.',
 					},
 					{
 						displayName: 'End Date',
@@ -1540,7 +1540,7 @@ export class Advbox implements INodeType {
 						type: 'string',
 						default: '',
 						placeholder: 'DD/MM/YYYY',
-						description: 'End date of the task in DD/MM/YYYY format',
+						description: 'End date of the task in DD/MM/YYYY format.',
 					},
 					{
 						displayName: 'End Time',
@@ -1548,7 +1548,7 @@ export class Advbox implements INodeType {
 						type: 'string',
 						default: '',
 						placeholder: 'HH:MM',
-						description: 'End time of the task in HH:MM format',
+						description: 'End time of the task in HH:MM format.',
 					},
 					{
 						displayName: 'Deadline Date',
@@ -1556,35 +1556,35 @@ export class Advbox implements INodeType {
 						type: 'string',
 						default: '',
 						placeholder: 'DD/MM/YYYY',
-						description: 'Deadline date of the task in DD/MM/YYYY format',
+						description: 'Deadline date of the task in DD/MM/YYYY format.',
 					},
 					{
 						displayName: 'Location',
 						name: 'local',
 						type: 'string',
 						default: '',
-						description: 'Location of the task',
+						description: 'Location of the task.',
 					},
 					{
 						displayName: 'Urgent',
 						name: 'urgent',
 						type: 'boolean',
 						default: false,
-						description: 'Indicates if the task is urgent',
+						description: 'Indicates if the task is urgent.',
 					},
 					{
 						displayName: 'Important',
 						name: 'important',
 						type: 'boolean',
 						default: false,
-						description: 'Indicates if the task is important',
+						description: 'Indicates if the task is important.',
 					},
 					{
 						displayName: 'Display in Schedule',
 						name: 'display_schedule',
 						type: 'boolean',
 						default: false,
-						description: 'Indicates if the task should be displayed in the calendar',
+						description: 'Indicates if the task should be displayed in the calendar.',
 					},
 				],
 			},
@@ -1595,7 +1595,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'Lawsuit ID to get task history for',
+				description: 'Lawsuit ID to get task history for.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1643,7 +1643,7 @@ export class Advbox implements INodeType {
 							},
 						],
 						default: 'all',
-						description: 'Filter tasks by status',
+						description: 'Filter tasks by status.',
 					},
 				],
 			},
@@ -1684,7 +1684,7 @@ export class Advbox implements INodeType {
 							},
 						],
 						default: 'all',
-						description: 'Filter tasks by status',
+						description: 'Filter tasks by status.',
 					},
 				],			},
 			// Lawsuit Task History parameters
@@ -1694,7 +1694,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'Lawsuit ID to get task history for',
+				description: 'Lawsuit ID to get task history for.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1742,7 +1742,7 @@ export class Advbox implements INodeType {
 							},
 						],
 						default: 'all',
-						description: 'Filter tasks by status',
+						description: 'Filter tasks by status.',
 					},
 				],
 			},
@@ -1753,7 +1753,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'ID of the lawsuit related to the movement',
+				description: 'ID of the lawsuit related to the movement.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1772,7 +1772,7 @@ export class Advbox implements INodeType {
 				required: true,
 				default: '',
 				placeholder: 'DD/MM/YYYY',
-				description: 'Movement date in DD/MM/YYYY format',
+				description: 'Movement date in DD/MM/YYYY format.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1790,7 +1790,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'Movement description',
+				description: 'Movement description.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1808,7 +1808,7 @@ export class Advbox implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				description: 'Lawsuit ID to get movement history for',
+				description: 'Lawsuit ID to get movement history for.',
 				displayOptions: {
 					show: {
 						resource: [
@@ -1852,7 +1852,7 @@ export class Advbox implements INodeType {
 								value: 'manual',
 							},
 						],
-						description: 'Filter movements by origin (court or manual)',
+						description: 'Filter movements by origin (court or manual).',
 					},
 				],
 			},
@@ -1865,7 +1865,7 @@ export class Advbox implements INodeType {
 				type: 'options',
 				required: true,
 				default: 'income',
-				description: 'Transaction type: income (credit) or expense (debit)',
+				description: 'Transaction type: income (credit) or expense (debit).',
 				displayOptions: {
 					show: {
 						resource: ['transaction'],
@@ -1876,12 +1876,12 @@ export class Advbox implements INodeType {
 					{
 						name: 'Income',
 						value: 'income',
-						description: 'Credit transaction',
+						description: 'Credit transaction.',
 					},
 					{
 						name: 'Expense',
 						value: 'expense',
-						description: 'Debit transaction',
+						description: 'Debit transaction.',
 					},
 				],
 			},
@@ -1894,7 +1894,7 @@ export class Advbox implements INodeType {
 				},
 				required: true,
 				default: '',
-				description: 'Responsible user for the transaction',
+				description: 'Responsible user for the transaction.',
 				displayOptions: {
 					show: {
 						resource: ['transaction'],
@@ -1908,7 +1908,7 @@ export class Advbox implements INodeType {
 				type: 'options',
 				required: true,
 				default: '',
-				description: 'Bank account for this transaction',
+				description: 'Bank account for this transaction.',
 				typeOptions: {
 					loadOptionsMethod: 'loadBanks',
 				},
@@ -1942,7 +1942,7 @@ export class Advbox implements INodeType {
 				type: 'options',
 				required: true,
 				default: '',
-				description: 'Cost center for this transaction',
+				description: 'Cost center for this transaction.',
 				typeOptions: {
 					loadOptionsMethod: 'loadCostCenters',
 				},
@@ -1974,7 +1974,7 @@ export class Advbox implements INodeType {
 				required: true,
 				default: '',
 				placeholder: 'YYYY-MM-DD',
-				description: 'Due date in YYYY-MM-DD format',
+				description: 'Due date in YYYY-MM-DD format.',
 				displayOptions: {
 					show: {
 						resource: ['transaction'],
@@ -2014,7 +2014,7 @@ export class Advbox implements INodeType {
 						name: 'sectors_id',
 						type: 'options',
 						default: '',
-						description: 'Department/sector for this transaction',
+						description: 'Department/sector for this transaction.',
 						typeOptions: {
 							loadOptionsMethod: 'loadDepartments',
 						},
@@ -2045,7 +2045,7 @@ export class Advbox implements INodeType {
 				type: 'number',
 				required: true,
 				default: 0,
-				description: 'ID of the transaction to update',
+				description: 'ID of the transaction to update.',
 				displayOptions: {
 					show: {
 						resource: ['transaction'],
@@ -2076,12 +2076,12 @@ export class Advbox implements INodeType {
 							{
 								name: 'Income',
 								value: 'income',
-								description: 'Credit transaction',
+								description: 'Credit transaction.',
 							},
 							{
 								name: 'Expense',
 								value: 'expense',
-								description: 'Debit transaction',
+								description: 'Debit transaction.',
 							},
 						],
 					},

@@ -19,7 +19,7 @@ export class AdvboxApi implements ICredentialType {
 			typeOptions: { password: true },
 			default: '',
 			required: true,
-			description: 'The ADVBOX API token',
+			description: 'The ADVBOX API token.',
 		},
 		{
 			displayName: 'API URL',
@@ -33,7 +33,7 @@ export class AdvboxApi implements ICredentialType {
 			type: 'string',
 			default: '',
 			required: false,
-			description: 'Optional agent identifier to be sent in x-agent header',
+			description: 'Optional agent identifier to be sent in x-agent header.',
 		},
 	];
 
