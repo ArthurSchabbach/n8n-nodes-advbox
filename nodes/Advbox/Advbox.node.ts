@@ -1008,11 +1008,11 @@ export class Advbox implements INodeType {
 								value: 'NEGOCIACAO',
 							},
 							{
-								name: 'Consultoria',
+								name: 'Consulting',
 								value: 'CONSULTORIA',
 							},
 							{
-								name: 'Administrativo',
+								name: 'Administrative',
 								value: 'ADMINISTRATIVO',
 							},
 							{
@@ -1020,7 +1020,7 @@ export class Advbox implements INodeType {
 								value: 'JUDICIAL',
 							},
 							{
-								name: 'Recursal',
+								name: 'Appeal',
 								value: 'RECURSAL',
 							},
 							{
@@ -1032,7 +1032,7 @@ export class Advbox implements INodeType {
 								value: 'RH_FINANCEIRO',
 							},
 							{
-								name: 'Arquivamento',
+								name: 'Archival',
 								value: 'ARQUIVAMENTO',
 							},
 						],
@@ -1838,13 +1838,13 @@ export class Advbox implements INodeType {
 				},
 				options: [
 					{
-						displayName: 'Origem',
+						displayName: 'Origin',
 						name: 'origin',
 						type: 'options',
 						default: '',
 						options: [
 							{
-								name: 'Tribunal',
+								name: 'Court',
 								value: 'tribunal',
 							},
 							{
