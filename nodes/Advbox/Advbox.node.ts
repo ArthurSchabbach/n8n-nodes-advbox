@@ -591,13 +591,6 @@ export class Advbox implements INodeType {
 				default: {},
 				options: [
 					{
-						displayName: 'User ID',
-						name: 'users_id',
-						type: 'number',
-						default: '',
-						description: 'ID of the user creating the customer.',
-					},
-					{
 						displayName: 'Email',
 						name: 'email',
 						type: 'string',
@@ -2332,8 +2325,8 @@ export class Advbox implements INodeType {
 
 						const name = this.getNodeParameter('name', i) as string;
 						const customers_origins_id = this.getNodeParameter('customers_origins_id', i) as number;
+						const users_id = this.getNodeParameter('users_id', i) as number;
 						const additionalFields = this.getNodeParameter('additionalFields', i) as {
-							users_id?: number;
 							email?: string;
 							identification?: string;
 							document?: string;
@@ -2350,12 +2343,8 @@ export class Advbox implements INodeType {
 						const body: Record<string, any> = {
 							name,
 							customers_origins_id,
+							users_id,
 						};
-
-						// Add required fields when provided
-						if (additionalFields.users_id) {
-							body.users_id = additionalFields.users_id;
-						}
 
 						if (additionalFields.email) {
 							body.email = additionalFields.email;
@@ -3337,17 +3326,41 @@ else if (operation === 'update') {
 
 				returnData.push(...executionData);
 			} catch (error) {
+				// Extract the real API response body so the user sees the actual error message
+				// instead of the generic "Request failed with status code NNN".
+				const apiBody = (error as any)?.response?.body;
+				let apiMessage: string;
+				let apiDescription: string | undefined;
+
+				if (apiBody !== undefined && apiBody !== null) {
+					if (typeof apiBody === 'string') {
+						apiMessage = apiBody;
+					} else if (typeof apiBody === 'object') {
+						apiMessage =
+							(apiBody as any).message ||
+							(apiBody as any).error ||
+							(apiBody as any).errors ||
+							JSON.stringify(apiBody);
+						apiDescription = JSON.stringify(apiBody);
+					} else {
+						apiMessage = String(apiBody);
+					}
+				} else {
+					apiMessage = error instanceof Error ? error.message : 'Unknown error';
+				}
+
 				if (this.continueOnFail()) {
-					// On error, create a valid error object
 					const currentResource = this.getNodeParameter('resource', i, 'unknown') as string;
 					const currentOperation = this.getNodeParameter('operation', i, 'unknown') as string;
 
 					const errorData = [{
 						json: {
-							error: error instanceof Error ? error.message : 'Unknown error',
+							error: apiMessage,
+							apiError: apiBody ?? null,
+							statusCode: (error as any)?.response?.statusCode ?? null,
 							resource: currentResource,
 							operation: currentOperation,
-							itemIndex: i
+							itemIndex: i,
 						}
 					}];
 
@@ -3358,7 +3371,11 @@ else if (operation === 'update') {
 					returnData.push(...executionData);
 					continue;
 				}
-				throw new NodeApiError(this.getNode(), error as JsonObject, { itemIndex: i });
+				throw new NodeApiError(this.getNode(), error as JsonObject, {
+					itemIndex: i,
+					message: apiMessage,
+					description: apiDescription,
+				});
 			}
 		}
 
