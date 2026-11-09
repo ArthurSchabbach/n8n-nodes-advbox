@@ -42,6 +42,7 @@ export class AdvboxApi implements ICredentialType {
 		properties: {
 			headers: {
 				Authorization: '=Bearer {{$credentials.apiToken}}',
+				'x-agent': '={{$credentials.xAgent}}',
 			},
 		},
 	};
